@@ -1,13 +1,13 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
+import Video from "./components/video"
 
 function App() {
 
   return (
     <>
-
+  <Video />
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/shuvroroy/youtube-clone/883c8d9a/public/css/main.css"></link>
 <div className="bg-white font-sans">
