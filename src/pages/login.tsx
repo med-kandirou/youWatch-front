@@ -14,6 +14,7 @@ import {
   } from '@chakra-ui/react'
 
   import { PasswordField } from '../components/PasswordField';
+import { memo } from 'react';
   
   function login() {
     return(
@@ -67,6 +68,6 @@ import {
     </>
 )}
 
-export default login;
+export default memo(login);
 
 

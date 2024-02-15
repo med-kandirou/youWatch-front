@@ -1,12 +1,14 @@
 import * as React from 'react'
 import {  ChakraProvider } from '@chakra-ui/react'
-import Login from './pages/login'
+import Register from './pages/register'
+import Video from './components/video'
 function App() {
 
   return (
     <>
         <ChakraProvider>
-          <Login />
+          {/* <Register /> */}
+          <Video />
         </ChakraProvider>
     </>
   )

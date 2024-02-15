@@ -26,7 +26,7 @@ import {
   
     return (
       <FormControl>
-        <FormLabel htmlFor="password">Password</FormLabel>
+        <FormLabel htmlFor="password">{props.name}</FormLabel>
         <InputGroup>
           <InputRightElement>
             <IconButton
