@@ -100,18 +100,18 @@ function Login() {
                       {...register("email", { required: true })}
                     />
                     {errors.email && <p>Email is required</p>}
-
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel htmlFor="Password">Password</FormLabel>
                     <Input
                       id="password"
                       type="password"
-                      value="password123"
                       {...register("password", { required: true })}
                     />
                     {errors.password && <p>password is required</p>}
                   </FormControl>
-                  {/* <PasswordField /> */}
                 </Stack>
-                <HStack justify="space-between">
+                <HStack className="pb-5 pt-5" justify="space-between">
                   <Checkbox colorScheme="red" defaultChecked>
                     Remember me
                   </Checkbox>
