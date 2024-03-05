@@ -35,7 +35,7 @@ const channelSlice = createSlice({
         //register
         builder.addCase(channelregister.fulfilled, (state, action) => {
             state.isAuth = true;
-            state.token = action.payload;
+            state.channel = action.payload;
         });
         builder.addCase(channelregister.rejected, (state,action) => {
             state.error = action.payload as string;

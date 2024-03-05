@@ -14,7 +14,7 @@ export const channelLogin = createAsyncThunk<string>(
     }
 )
 
-export const channelregister = createAsyncThunk<string>(
+export const channelregister = createAsyncThunk<Channel>(
     'auth/register',
     async (channelCredentials,{ rejectWithValue }) => {
         try {

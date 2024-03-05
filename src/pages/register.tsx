@@ -66,8 +66,8 @@ import { useDispatch } from 'react-redux';
                     </FormControl>
                     <FormControl>
                         <FormLabel htmlFor="lname">Last Name</FormLabel>
-                        <Input id="lastName" type="text" {...register("lastName", { required: true })} />
-                        {errors.lastName && <p className="text-red-500">Last name is required</p>}
+                        <Input id="lastname" type="text" {...register("lastname", { required: true })} />
+                        {errors.lastname && <p className="text-red-500">Last name is required</p>}
                     </FormControl>  
                     <FormControl>
                         <FormLabel htmlFor="email">Email</FormLabel>
