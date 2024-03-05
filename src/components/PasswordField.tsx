@@ -43,7 +43,6 @@ import {
             name="password"
             type={isOpen ? 'text' : 'password'}
             autoComplete="current-password"
-            required
             {...props}
           />
         </InputGroup>

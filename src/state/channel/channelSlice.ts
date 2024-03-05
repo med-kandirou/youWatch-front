@@ -5,13 +5,17 @@ import { channelLogin } from "./channelActions";
 interface channelState {
     channel:Channel | null
     token:string | null;
-    isAuth:boolean
+    isAuth:boolean,
+    error:string,
+    loading:boolean
 }
 
 const initialState:channelState={
     channel:null,
     token:localStorage.getItem('token') || null,
-    isAuth:false
+    isAuth:false,
+    error:'',
+    loading:false
 }
 
 const channelSlice = createSlice({
@@ -21,15 +25,12 @@ const channelSlice = createSlice({
         builder.addCase(channelLogin.fulfilled, (state, action) => {
             state.isAuth = true;
             state.token = action.payload;
-            console.log("fulfilled");
         });
-        builder.addCase(channelLogin.rejected, (state) => {
-            state.isAuth = true;
-            console.log("rejected");
+        builder.addCase(channelLogin.rejected, (state,action) => {
+            state.error = action.payload as string;
         });
         builder.addCase(channelLogin.pending, (state) => {
             state.isAuth = true;
-            console.log("rejected");
         });
     },
     reducers:{}

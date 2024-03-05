@@ -4,25 +4,24 @@ import myApi from "../../axios/myApi"
 
 export const channelLogin = createAsyncThunk<string>(
     'auth/login',
-    async (channelCredentials) => {
+    async (channelCredentials,{ rejectWithValue }) => {
         try {
-           
             const { data } = await myApi.post('/auth/login',channelCredentials)
             return data
         } catch (error) {
-            return isRejectedWithValue("Something went wrong. Please try again later.")
+            return rejectWithValue("Email or password incorrect")
         }
     }
 )
 
 export const channelregister = createAsyncThunk<Channel>(
     'auth/register',
-    async () => {
+    async (channelCredentials,{ rejectWithValue }) => {
         try {
-            const { data } = await myApi.post(`/auth/register`)
+            const { data } = await myApi.post(`/auth/register`,channelCredentials)
             return data
         } catch (error) {
-            return isRejectedWithValue("Something went wrong. Please try again later.")
+            return rejectWithValue(error)
         }
     }
 )
