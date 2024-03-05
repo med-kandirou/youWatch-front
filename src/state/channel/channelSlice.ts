@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Channel } from "../../Models/Channel";
-import { channelLogin } from "./channelActions";
+import { channelLogin, channelregister } from "./channelActions";
 
 interface channelState {
     channel:Channel | null
@@ -30,6 +30,17 @@ const channelSlice = createSlice({
             state.error = action.payload as string;
         });
         builder.addCase(channelLogin.pending, (state) => {
+            state.isAuth = true;
+        });
+        //register
+        builder.addCase(channelregister.fulfilled, (state, action) => {
+            state.isAuth = true;
+            state.token = action.payload;
+        });
+        builder.addCase(channelregister.rejected, (state,action) => {
+            state.error = action.payload as string;
+        });
+        builder.addCase(channelregister.pending, (state) => {
             state.isAuth = true;
         });
     },

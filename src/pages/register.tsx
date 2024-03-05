@@ -11,9 +11,24 @@ import {
     Text,
   } from '@chakra-ui/react'
 
-import { PasswordField } from '../components/PasswordField';
-  
-  function register() {
+import { useForm } from 'react-hook-form';
+import { channelregister } from '../state/channel/channelActions';
+import { useDispatch } from 'react-redux';
+
+  function Register() {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+    const dispatch = useDispatch();
+
+    function onSubmit(data:object) {
+        dispatch(channelregister(data)).then((res:string) => {
+            console.log(res);
+        }); 
+    }
+
     return(
         <>            
         <Container maxW="lg" py={{ base: '12', md: '17' }} px={{ base: '0', sm: '8' }}>
@@ -42,25 +57,39 @@ import { PasswordField } from '../components/PasswordField';
             borderRadius={{ base: 'none', sm: 'xl' }}
             >
             <Stack spacing="6">
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing="5">
-                        <FormControl>
-                            <FormLabel htmlFor="fname">First Name</FormLabel>
-                            <Input id="fname" type="text" />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel htmlFor="lname">Last Name</FormLabel>
-                            <Input id="lname" type="text" />
-                        </FormControl>  
-                <FormControl>
-                    <FormLabel htmlFor="email">Email</FormLabel>
-                    <Input id="email" type="email" />
-                </FormControl>
-                <PasswordField name='Password'/>
-                <PasswordField name='Confirmation password'/>
+                    <FormControl>
+                        <FormLabel htmlFor="fname">First Name</FormLabel>
+                        <Input id="firstname" type="text" {...register("firstname", { required: true })} />
+                        {errors.firstname && <p className="text-red-500">First name is required</p>}
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor="lname">Last Name</FormLabel>
+                        <Input id="lastName" type="text" {...register("lastName", { required: true })} />
+                        {errors.lastName && <p className="text-red-500">Last name is required</p>}
+                    </FormControl>  
+                    <FormControl>
+                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <Input id="email" type="email" {...register("email", { required: true })}/>
+                        {errors.email && <p className="text-red-500">Email is required</p>}
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor="email">Password</FormLabel>
+                        <Input id="password" type="password" {...register("password", { required: true })}/>
+                        {errors.password && <p className="text-red-500">Password is required</p>}
+                    </FormControl>
+                    <Input id="role" type="text" value='USER' hidden {...register("role", { required: true })}/>
+                    {/* <FormControl>
+                        <FormLabel htmlFor="email">Confirmation password</FormLabel>
+                        <Input id="cpassword" type="password" {...register("cpassword", { required: true })}/>
+                        {errors.cpassword && <p className="text-red-500">Confirmation password is required</p>}
+                    </FormControl> */}
                 </Stack>
                 <Stack spacing="6">
-                <Button colorScheme="red">Sign up</Button>
+                    <Button colorScheme="red" type='submit'>Sign up</Button>
                 </Stack>
+            </form>
             </Stack>
             </Box>
         </Stack>
@@ -68,6 +97,6 @@ import { PasswordField } from '../components/PasswordField';
     </>
 )}
 
-export default register;
+export default Register;
 
 

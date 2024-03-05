@@ -1,4 +1,4 @@
-import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
+import { createAsyncThunk } from "@reduxjs/toolkit"
 import { Channel } from "../../Models/Channel"
 import myApi from "../../axios/myApi"
 
@@ -14,7 +14,7 @@ export const channelLogin = createAsyncThunk<string>(
     }
 )
 
-export const channelregister = createAsyncThunk<Channel>(
+export const channelregister = createAsyncThunk<string>(
     'auth/register',
     async (channelCredentials,{ rejectWithValue }) => {
         try {

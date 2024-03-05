@@ -99,7 +99,7 @@ function Login() {
                       type="email"
                       {...register("email", { required: true })}
                     />
-                    {errors.email && <p>Email is required</p>}
+                    {errors.email && <p className="text-red-500">Email is required</p>}
                   </FormControl>
                   <FormControl>
                     <FormLabel htmlFor="Password">Password</FormLabel>
@@ -108,7 +108,7 @@ function Login() {
                       type="password"
                       {...register("password", { required: true })}
                     />
-                    {errors.password && <p>password is required</p>}
+                    {errors.password && <p className="text-red-500">password is required</p>}
                   </FormControl>
                 </Stack>
                 <HStack className="pb-5 pt-5" justify="space-between">
