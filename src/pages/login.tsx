@@ -13,10 +13,22 @@ import {
     Text,
   } from '@chakra-ui/react'
 
-  import { PasswordField } from '../components/PasswordField';
-import { memo } from 'react';
-  
+    import { PasswordField } from '../components/PasswordField';
+    import { useForm } from 'react-hook-form';
+
+    import { channelLogin } from '../state/channel/channelActions';
+import { useDispatch } from 'react-redux';
+
   function login() {
+    const { register, handleSubmit,formState:{errors} } = useForm();
+    
+    const dispatch = useDispatch()
+    function onSubmit(data) {
+        console.log(data);
+
+        dispatch(channelLogin(data))
+    }
+
     return(
         <>            
         <Container maxW="lg" py={{ base: '12', md: '17' }} px={{ base: '0', sm: '8' }}>
@@ -45,22 +57,25 @@ import { memo } from 'react';
             borderRadius={{ base: 'none', sm: 'xl' }}
             >
             <Stack spacing="6">
-                <Stack spacing="5">
-                <FormControl>
-                    <FormLabel htmlFor="email">Email</FormLabel>
-                    <Input id="email" type="email" />
-                </FormControl>
-                <PasswordField />
-                </Stack>
-                <HStack justify="space-between">
-                  <Checkbox colorScheme="red" defaultChecked>Remember me</Checkbox>
-                  <Button variant="text" size="sm">
-                    Forgot password?
-                  </Button>
-                </HStack>
-                <Stack spacing="6">
-                <Button colorScheme="red">Sign in</Button>
-                </Stack>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Stack spacing="5">
+                    <FormControl>
+                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <Input id="email" type="email" {...register("email",{required:true})}/>
+                        {errors.email && <p>Email is required</p>}
+                    </FormControl>
+                    {/* <PasswordField /> */}
+                    </Stack>
+                    <HStack justify="space-between">
+                    <Checkbox colorScheme="red" defaultChecked>Remember me</Checkbox>
+                    <Button variant="text" size="sm">
+                        Forgot password?
+                    </Button>
+                    </HStack>
+                    <Stack spacing="6">
+                    <Button type='submit' colorScheme="red">Sign in</Button>
+                    </Stack>
+                </form>
             </Stack>
             </Box>
         </Stack>
@@ -68,6 +83,7 @@ import { memo } from 'react';
     </>
 )}
 
-export default memo(login);
+export default login;
+
 
 
