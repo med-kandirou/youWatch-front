@@ -9,11 +9,10 @@ function Video(){
                 className="w-full rounded-md"
                 width="320"
                 height="180"
-                style={{ aspectRatio: "320 / 180", objectFit: "cover" }}
-            />
+                style={{ aspectRatio: "320 / 180", objectFit: "cover" }} />
             <div className="flex">
                 <div>
-                <img src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="..." className="shadow rounded-full max-52 h-52 align-middle border-none" />
+                <img src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="..." className="shadow rounded-full h-12 mr-3 align-middle border-none" />
                 </div>
                 <div>
                     <h3 className="text-sm font-semibold">ElgrandeToto - 7elmet Ado 6 (Lyrics by Hamza)</h3>

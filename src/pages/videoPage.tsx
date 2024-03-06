@@ -127,9 +127,7 @@ function VideoPage () {
                         <div className="space-y-2">
                         <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
                             <div className="p-6">
-                                <div className="items-start space-x-4">
-                                    <Video />
-                                    <Video />
+                                <div className="space-x-4">
                                     <Video />
                                 </div>
                             </div>
