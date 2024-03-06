@@ -13,7 +13,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { PasswordField } from "../components/PasswordField";
+
 import { useForm } from "react-hook-form";
 import { channelLogin } from "../state/channel/channelActions";
 import { useDispatch } from "react-redux";
