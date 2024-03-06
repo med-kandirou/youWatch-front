@@ -1,4 +1,6 @@
+import Comments from "../components/comments";
 import Header from "../components/header"
+import Video from "../components/video";
 
 
 function VideoPage () {
@@ -13,6 +15,7 @@ function VideoPage () {
                             src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                             alt="Video player"
                             width="640"
+                            className="w-full rounded-md ml-2"
                             height="360"
                             style={{ aspectRatio: "320 / 180", objectFit: "cover" }}
                         />
@@ -108,6 +111,10 @@ function VideoPage () {
                         </button>
                         </div>
                     </div>
+
+                    <Comments />
+
+
                     </div>
                     <div>
                     <div className="flex flex-col space-y-4">
@@ -120,20 +127,11 @@ function VideoPage () {
                         <div className="space-y-2">
                         <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
                             <div className="p-6">
-                            <div className="flex items-start space-x-4">
-                                <img
-                                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                                    alt="Video thumbnail"
-                                    className="w-24 h-14"
-                                    width="168"
-                                    height="94"
-                                //style="aspect-ratio: 168 / 94; object-fit: cover;"
-                                />
-                                <div className="flex flex-col space-y-1">
-                                    <h3 className="text-sm font-medium">7-TOUN - MILANO (EXCLUSIVE Music Video)</h3>
-                                    <p className="text-xs text-gray-500">7-TOUN</p>
+                                <div className="items-start space-x-4">
+                                    <Video />
+                                    <Video />
+                                    <Video />
                                 </div>
-                            </div>
                             </div>
                         </div>
                         </div>
