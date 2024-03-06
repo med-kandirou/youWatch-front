@@ -85,12 +85,12 @@ function Home() {
                 <div className="grid grid-cols-4 gap-4 p-4">
                 <div className="space-y-2">
                     <img
-                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                    alt="Video thumbnail"
-                    className="w-full rounded-md"
-                    width="320"
-                    height="180"
-                    style={{ aspectRatio: "320 / 180", objectFit: "cover" }}
+                        src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                        alt="Video thumbnail"
+                        className="w-full rounded-md"
+                        width="320"
+                        height="180"
+                        style={{ aspectRatio: "320 / 180", objectFit: "cover" }}
                     />
                     <div className="flex">
                         <div>
