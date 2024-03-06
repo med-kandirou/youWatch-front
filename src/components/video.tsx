@@ -1,12 +1,12 @@
 
 import * as React from 'react'
 
-function video(){
+
+function Video(){
     return( 
     <>
     </>
-        
     )
 }
 
-export default video;
+export default Video;

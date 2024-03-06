@@ -80,11 +80,11 @@ import { useDispatch } from 'react-redux';
                         {errors.password && <p className="text-red-500">Password is required</p>}
                     </FormControl>
                     <Input id="role" type="text" value='USER' hidden {...register("role", { required: true })}/>
-                    {/* <FormControl>
+                    <FormControl>
                         <FormLabel htmlFor="email">Confirmation password</FormLabel>
                         <Input id="cpassword" type="password" {...register("cpassword", { required: true })}/>
                         {errors.cpassword && <p className="text-red-500">Confirmation password is required</p>}
-                    </FormControl> */}
+                    </FormControl>
                 </Stack>
                 <Stack spacing="6">
                     <Button colorScheme="red" type='submit'>Sign up</Button>
@@ -98,5 +98,4 @@ import { useDispatch } from 'react-redux';
 )}
 
 export default Register;
-
 
