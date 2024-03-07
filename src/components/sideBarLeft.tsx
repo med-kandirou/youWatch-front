@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-function SideBar(){
+function SideBarLeft(){
     return( 
     <>
     <div className="w-60 p-4 space-y-6">
@@ -82,4 +82,4 @@ function SideBar(){
     )
 }
 
-export default SideBar;
+export default SideBarLeft;

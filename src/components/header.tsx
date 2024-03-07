@@ -1,3 +1,5 @@
+import SideBar from "./sideBarLeft";
+import SideBarRight from "./sideBarRight";
 
 function Header(){
     return( 
@@ -131,7 +133,8 @@ function Header(){
                 <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
             </svg>
             <div className="flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full">
-                <button className="text-white">K</button>
+                {/* <button className="text-white">KN</button> */}
+                <SideBarRight />
             </div>
             </div>
         </div>
