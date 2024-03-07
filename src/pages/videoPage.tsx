@@ -11,14 +11,14 @@ function VideoPage () {
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
                     <div className="aspect-w-16 aspect-h-9 bg-white">
-                        <img
-                            src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                            alt="Video player"
+                        <iframe 
+                            src="https://player.cloudinary.com/embed/?cloud_name=drlfmis63&public_id=samples/dance-2"
                             width="640"
                             className="w-full rounded-md ml-2"
                             height="360"
+                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
                             style={{ aspectRatio: "320 / 180", objectFit: "cover" }}
-                        />
+                         ></iframe>
                     </div>
                     <div className="flex flex-col p-4">
                         <h1 className="text-2xl font-bold">ElgrandeToto - 7elmet Ado 6 (Lyrics by Hamza)</h1>
@@ -44,9 +44,9 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            //strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeWidth="round"
                             className="w-6 h-6"
                             >
                             <path d="M7 10v12"></path>
@@ -62,9 +62,9 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            //strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeWidth="round"
                             className="w-6 h-6"
                             >
                             <path d="M17 14V2"></path>
@@ -79,9 +79,9 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            //strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeWidth="round"
                             className="w-6 h-6"
                             >
                             <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
@@ -98,9 +98,9 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            //strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeWidth="round"
                             className="w-6 h-6"
                             >
                             <circle cx="12" cy="12" r="10"></circle>
@@ -111,10 +111,7 @@ function VideoPage () {
                         </button>
                         </div>
                     </div>
-
-                    <Comments />
-
-
+                        <Comments />
                     </div>
                     <div>
                     <div className="flex flex-col space-y-4">

@@ -2,7 +2,7 @@
 function Video(){
     return( 
     <>
-        <div className="space-y-2">
+        <div className="space-y-2 cursor-pointer" >
             <img
                 src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
                 alt="Video thumbnail"
