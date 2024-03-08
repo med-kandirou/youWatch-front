@@ -4,6 +4,7 @@ import Register from './pages/register'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/home'
 import Video from './pages/videoPage'
+import SearchPage from './pages/searchPage'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
               <Route path="/watch" element={<Video />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
           </BrowserRouter >
         </ChakraProvider>
