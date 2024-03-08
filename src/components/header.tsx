@@ -1,7 +1,11 @@
-import SideBar from "./sideBarLeft";
+
+import { useSelector } from "react-redux";
 import SideBarRight from "./sideBarRight";
+import { RootState } from "../state/store";
 
 function Header(){
+
+    const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
     return( 
     <>
         <div className="flex items-center justify-between px-4 py-2">
@@ -133,8 +137,11 @@ function Header(){
                 <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
             </svg>
             <div className="flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full">
-                {/* <button className="text-white">KN</button> */}
-                <SideBarRight />
+                {isAuth ? (
+                    <SideBarRight />
+                ) : (
+                    <button className="text-white">KN</button>
+                )}
             </div>
             </div>
         </div>
