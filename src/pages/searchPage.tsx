@@ -1,6 +1,6 @@
 import Header from "../components/header";
 import SideBarLeft from "../components/sideBarLeft";
-import Video from "../components/video";
+
 
 function SearchPage(){
 

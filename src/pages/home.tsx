@@ -23,7 +23,6 @@ function Home() {
                             <Video />
                         </div>
                     </div>
-                
             </div>
         </div>
       </>
