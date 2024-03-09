@@ -1,24 +1,24 @@
 import { Button } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { getAllCategories } from "../state/categories/categorieActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../state/store";
 
 
 function Categories(){
     const dispatch = useDispatch();
     useEffect(() => {
-        // dispatch(getAllCategories()).then((res:string) => {
-        //     console.log(res);
-        // }); 
-        console.log("test");
-    });
-    
+        dispatch(getAllCategories())
+    }, []);
+    const categories=useSelector((state:RootState)=>state.categories.categories)
     return (
         <>
             <div className="ml-4 mt-6 flex gap-3">
-                <Button colorScheme='black' variant='outline'>
-                    Button
-                </Button>
+                {categories.map(cat => (
+                   <Button key={cat.id} colorScheme='black' variant='outline'>
+                    {cat.name}
+                    </Button>
+                ))}
             </div>
         </>
     )
