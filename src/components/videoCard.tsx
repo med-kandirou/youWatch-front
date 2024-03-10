@@ -1,7 +1,12 @@
 import { Video } from "../Models/Video";
 
-function VideoCard(props:Video){
+// import TimeAgo from 'javascript-time-ago'
 
+// import en from 'javascript-time-ago/locale/en'
+
+function VideoCard(props:Video){
+    // TimeAgo.addLocale(en)
+    // const timeAgo = new TimeAgo('en-US')
     return( 
     <>
         <div className="space-y-2 cursor-pointer" >
