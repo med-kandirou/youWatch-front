@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { Channel } from "../../Models/Channel"
-import myApi from "../../axios/myApi"
+import myApi from "../../helpers/myApi"
 
 export const channelLogin = createAsyncThunk<string>(
     'auth/login',

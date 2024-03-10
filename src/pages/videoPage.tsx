@@ -1,9 +1,22 @@
+import { useEffect } from "react";
 import Comments from "../components/comments";
 import Header from "../components/header"
-import Video from "../components/videoCard";
+import { getCurrentVideo } from "../state/currentVideo/currentVideoActions";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../state/store";
+import { useParams } from "react-router-dom";
+import { convertDate, convertNumber } from "../helpers/converters";
+// import Video from "../components/videoCard";
 
 
 function VideoPage () {
+    const video_id = useParams();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getCurrentVideo(video_id.id))
+    }, []);
+    const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
+
     return (
         <>
             <Header />
@@ -12,7 +25,7 @@ function VideoPage () {
                     <div className="col-span-2">
                     <div className="aspect-w-16 aspect-h-9 bg-white">
                         <iframe 
-                            src="https://player.cloudinary.com/embed/?cloud_name=drlfmis63&public_id=samples/dance-2"
+                            src={currentVideo?.link}
                             width="640"
                             className="w-full rounded-md ml-2"
                             height="360"
@@ -21,19 +34,28 @@ function VideoPage () {
                          ></iframe>
                     </div>
                     <div className="flex flex-col p-4">
-                        <h1 className="text-2xl font-bold">ElgrandeToto - 7elmet Ado 6 (Lyrics by Hamza)</h1>
+                        <h1 className="text-2xl font-bold">{currentVideo?.title}</h1>
                         <div className="flex items-center justify-between py-2">
                         <div className="flex items-center space-x-2">
                             <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
                             <img
                                 className="aspect-square h-full w-full"
                                 alt="Sparkle Beats"
-                                src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                                src={currentVideo?.channel.profilImg}
                             />
                             </span>
-                            <span className="text-sm">Sparkle Beats</span>
+                            <span className="text-sm">{currentVideo?.channel.firstname} {currentVideo?.channel.lastname}</span>
                         </div>
-                        <span className="text-sm">153 k vues il y a 1 an</span>
+                        <span className="text-sm">
+                            {currentVideo?.nbrVues !== undefined
+                                ? `${convertNumber(currentVideo.nbrVues)} vues`
+                                : "Unknown vues"}
+                            {" il y a "}
+
+                            {currentVideo?.datePosting !== undefined
+                                ? `${convertDate(currentVideo?.datePosting)}`
+                                : "Unknown date"}
+                            </span>
                         </div>
                         <div className="flex items-center space-x-4">
                         <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
@@ -44,7 +66,6 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            //strokeWidth="2"
                             strokeLinecap="round"
                             strokeWidth="round"
                             className="w-6 h-6"
@@ -62,7 +83,6 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            //strokeWidth="2"
                             strokeLinecap="round"
                             strokeWidth="round"
                             className="w-6 h-6"
@@ -79,7 +99,6 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            //strokeWidth="2"
                             strokeLinecap="round"
                             strokeWidth="round"
                             className="w-6 h-6"
@@ -98,7 +117,6 @@ function VideoPage () {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            //strokeWidth="2"
                             strokeLinecap="round"
                             strokeWidth="round"
                             className="w-6 h-6"

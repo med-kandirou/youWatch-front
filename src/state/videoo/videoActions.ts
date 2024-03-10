@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import myApi from "../../axios/myApi"
+import myApi from "../../helpers/myApi"
 import { Video } from "../../Models/Video"
 
 

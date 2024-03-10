@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { Category } from "../../Models/Categorie"
-import myApi from "../../axios/myApi"
+import myApi from "../../helpers/myApi"
 
 
 export const getAllCategories = createAsyncThunk<Category[]>(
