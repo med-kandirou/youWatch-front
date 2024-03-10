@@ -3,7 +3,7 @@ import { Channel } from "./Channel";
 
 export interface Video{
     id:number;
-    name:string;
+    title:string;
     description:string;
     link:string;
     thumbnail:string;

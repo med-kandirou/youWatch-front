@@ -1,10 +1,10 @@
 export interface Channel{
     id:number;
-    firstName:string;
-    lastName:string;
+    firstname:string;
+    lastname:string;
     creationDate:Date;
-    profil_img:string;
-    cover_img:string;
+    profilImg:string;
+    coverImg:string;
     email:string;
     role:string;
 }

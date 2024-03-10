@@ -1,6 +1,6 @@
 import Comments from "../components/comments";
 import Header from "../components/header"
-import Video from "../components/video";
+import Video from "../components/videoCard";
 
 
 function VideoPage () {
