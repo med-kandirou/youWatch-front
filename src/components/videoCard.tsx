@@ -1,12 +1,19 @@
 import { Video } from "../Models/Video";
-
 import TimeAgo from 'javascript-time-ago'
-
 import en from 'javascript-time-ago/locale/en'
 
 function VideoCard(props:Video){
     TimeAgo.addLocale(en)
     const timeAgo = new TimeAgo('en-US')
+
+
+    function convertNumber(num:number){
+        return Intl.NumberFormat('en-US', {
+            notation: "compact",
+            maximumFractionDigits: 1
+        }).format(num);
+    }
+    
     return( 
     <>
         <div className="space-y-2 cursor-pointer" >
@@ -24,7 +31,7 @@ function VideoCard(props:Video){
                 <div>
                     <h3 className="text-sm font-semibold">{props.title}</h3>
                     <h3 className="text-sm text-gray-600">{props.channel.firstname} {props.channel.lastname}</h3>
-                    <p className="text-xs text-gray-600">{props.nbrVues} de vues • {timeAgo.format(new Date(props.datePosting))}</p>
+                    <p className="text-xs text-gray-600">{convertNumber(props.nbrVues)} de vues • {timeAgo.format(new Date(props.datePosting))}</p>
                 </div>
             </div>
         </div>
