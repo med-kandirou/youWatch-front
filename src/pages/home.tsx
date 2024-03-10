@@ -30,7 +30,7 @@ function Home() {
                         {videos ? (
                           videos.map((v: Video) => <VideoCard key={v.id} {...v} />)
                         ) : (
-                          <Spinner size='xl' className="flex justify-center items-center"/>
+                          <center><Spinner size='xl'/></center>
                         )}
                         </div>
                     </div>
