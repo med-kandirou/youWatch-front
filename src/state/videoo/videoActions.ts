@@ -5,8 +5,8 @@ import { Video } from "../../Models/Video"
 
 export const getAllvideos = createAsyncThunk<Video[]>(
     'video/all',
-    async () => {
-        const { data } = await myApi.get(`/video`)
+    async (page) => {
+        const { data } = await myApi.get(`/video?page=${page}&size=6`)
         return data
     }
 )

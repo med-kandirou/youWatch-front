@@ -16,7 +16,7 @@ function Categories(){
             <div className="ml-4 mt-6 flex gap-3">
                 {categories.map(cat => (
                    <Button key={cat.id} colorScheme='black' variant='outline'>
-                    {cat.name}
+                        {cat.name}
                     </Button>
                 ))}
             </div>
