@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux";
 import SideBarRight from "./sideBarRight";
 import { RootState } from "../state/store";
+import { Link } from "react-router-dom";
 
 function Header(){
 
@@ -133,7 +134,7 @@ function Header(){
                 {isAuth ? (
                     <SideBarRight />
                 ) : (
-                    <button className="text-white">KN</button>
+                    <Link to="/login" className="text-white">KN</Link>
                 )}
             </div>
             </div>

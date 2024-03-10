@@ -8,7 +8,6 @@ import {
   HStack,
   Heading,
   Input,
-  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -17,6 +16,7 @@ import {
 import { useForm } from "react-hook-form";
 import { channelLogin } from "../state/channel/channelActions";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Login() {
   const {
@@ -76,7 +76,7 @@ function Login() {
               </Heading>
               <Text color="fg.muted">
                 Don't have an account?{" "}
-                <Link href="#" color={"red"}>
+                <Link to="/register" className="text-rose-600">
                   Sign up
                 </Link>
               </Text>

@@ -6,7 +6,6 @@ import {
     FormLabel,
     Heading,
     Input,
-    Link,
     Stack,
     Text,
   } from '@chakra-ui/react'
@@ -14,6 +13,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { channelregister } from '../state/channel/channelActions';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
   function Register() {
     const {
@@ -45,7 +45,7 @@ import { useDispatch } from 'react-redux';
             <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
                 <Heading size={{ base: 'xs', md: 'lg' }}>Log in to your account</Heading>
                 <Text color="fg.muted">
-                Don't have an account? <Link href="#" color={'red'}>Sign up</Link>
+                Don't have an account? <Link to="/login" className="text-rose-600">Sign up</Link>
                 </Text>
             </Stack>
             </Stack>
