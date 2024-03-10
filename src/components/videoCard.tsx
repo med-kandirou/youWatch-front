@@ -16,7 +16,7 @@ function VideoCard(props:Video){
     
     return( 
     <>
-        <div className="space-y-2 cursor-pointer" >
+        <div className="space-y-2 cursor-pointer">
             <img
                 src={props.thumbnail}
                 alt="Video thumbnail"

@@ -9,6 +9,7 @@ import { RootState } from "../state/store";
 import { Video } from "../Models/Video";
 import VideoCard from "../components/videoCard";
 import { Spinner } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 
   
@@ -28,7 +29,10 @@ function Home() {
                         <Categories />
                         <div className="grid grid-cols-3 gap-4 p-4">
                         {videos ? (
-                          videos.map((v: Video) => <VideoCard key={v.id} {...v} />)
+                          videos.map((v: Video) => 
+                            <Link key={v.id} to={`/watch/${v.id}`}>
+                              <VideoCard key={v.id} {...v} />
+                            </Link>)
                         ) : (
                           <center><Spinner size='xl'/></center>
                         )}

@@ -19,7 +19,6 @@ function Header(){
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
-                //strokeLinejoin="round"
                 className="text-gray-700"
                 >
                 <line x1="4" x2="20" y1="12" y2="12"></line>
@@ -37,7 +36,6 @@ function Header(){
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
-                //strokeLinejoin="round"
                 className="text-red-600"
             >
                 <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
@@ -62,7 +60,6 @@ function Header(){
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
-                    //strokeLinejoin="round"
                     className="text-gray-700"
                 >
                     <circle cx="11" cy="11" r="8"></circle>
@@ -79,7 +76,6 @@ function Header(){
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
-                    //strokeLinejoin="round"
                     className="text-gray-700"
                 >
                     <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
@@ -98,7 +94,6 @@ function Header(){
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
-                //strokeLinejoin="round"
                 className="text-gray-700"
             >
                 <path d="m22 8-6 4 6 4V8Z"></path>
@@ -113,7 +108,6 @@ function Header(){
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
-                //strokeLinejoin="round"
                 className="text-gray-700"
             >
                 <rect width="7" height="7" x="3" y="3" rx="1"></rect>
@@ -130,7 +124,6 @@ function Header(){
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
-                //strokeLinejoin="round"
                 className="text-gray-700"
             >
                 <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
