@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Video } from "../../Models/Video";
-import { getAllvideos } from "./videoActions";
+import { getAllvideos, searchVideo } from "./videoActions";
 
 
 interface videoState {
@@ -16,6 +16,10 @@ const videoSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder.addCase(getAllvideos.fulfilled, (state, action) => {
+            state.videos = action.payload;
+        });
+        //search
+        builder.addCase(searchVideo.fulfilled, (state, action) => {
             state.videos = action.payload;
         });
     },

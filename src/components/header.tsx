@@ -1,12 +1,21 @@
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SideBarRight from "./sideBarRight";
 import { RootState } from "../state/store";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { searchVideo } from "../state/videoo/videoActions";
 
 function Header(){
 
     const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
+    const [inputSearch, setInputSearch] = useState('80%');
+    const dispatch= useDispatch();
+
+    function search(){
+        dispatch(searchVideo(inputSearch))
+    }
+
     return( 
     <>
         <div className="flex items-center justify-between px-4 py-2">
@@ -44,14 +53,15 @@ function Header(){
             </svg>
             <h1 className="text-xl font-bold">YouWatch</h1>
             </div>
-
             <div className="flex items-center space-x-4">
             <input
                 className="flex h-10 border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-96 px-4 py-2 border rounded"
-                placeholder="Rechercher"
+                placeholder="Search"
                 type="search"
+                value={inputSearch}
+                onChange={e => setInputSearch(e.target.value)}
             />
-            <button>
+            <button onClick={()=>search()}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"

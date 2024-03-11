@@ -9,7 +9,8 @@ function SearchPage(){
            <div className="bg-white">
             <Header />
             <div className="flex">
-                    <SideBarLeft />
+                <SideBarLeft />
+                
                 <div className="grid grid-cols-1 gap-4 p-4">
                     <div className="flex gap-6 space-y-2 cursor-pointer" >
                         <img
@@ -17,7 +18,6 @@ function SearchPage(){
                             alt="Video thumbnail"
                             className="w-full rounded-md"
                             style={{ maxWidth: "500px", maxHeight: "260px", width: "100%", height: "auto", objectFit: "cover" }}
-                            //style={{ maxWidth: "500px", maxHeight: "300px", width: "100%", height: "auto", objectFit: "cover" }}
                             />
                         <div>
                             <div>
