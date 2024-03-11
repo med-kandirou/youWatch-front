@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Comments from "../components/comments";
 import Header from "../components/header"
-import { getCurrentVideo, getvideoByChannel } from "../state/currentVideo/currentVideoActions";
+import { getCommentByVideo, getCurrentVideo, getvideoByChannel } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../state/store";
 import { Link, useParams } from "react-router-dom";
@@ -10,6 +10,7 @@ import { Video } from "../Models/Video";
 import VideoCard from "../components/videoCard";
 import { Spinner } from "@chakra-ui/react";
 import Categories from "../components/categories";
+import { Comment } from "../Models/Comment";
 
 function VideoPage () {
     const video_id = useParams();
@@ -20,6 +21,7 @@ function VideoPage () {
     useEffect(() => {
         dispatch(getCurrentVideo(video_id.id)).then(() => {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
+            dispatch(getCommentByVideo(video_id.id));
         });
     },[]);
     return (
@@ -134,8 +136,31 @@ function VideoPage () {
                             </svg>
                         </button>
                         </div>
+                    </div>             
+                    <div className="space-y-6">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-2xl font-bold">( {comments.length} ) Comments</h2>
+                            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                                Sort by
+                            </button>
+                        </div>
+                        <input
+                            className="flex h-10 border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-4/5 rounded-md border p-2 ml-10"
+                            placeholder="Add comment...." />
+                        <div className="space-y-4">
+                            <div className="flex items-start space-x-4">
+                                <div className="flex-1 ml-5">
+                                    {comments ? (
+                                        comments.map((c: Comment) => 
+                                            <Comments {...c} />
+                                        )
+                                    ) : (
+                                        <div>aucun comment</div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                        <Comments {...comments}/>
                     </div>
                     <div>
                     <div className="flex flex-col space-y-4">
