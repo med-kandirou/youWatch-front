@@ -15,7 +15,7 @@ export const getAllvideos = createAsyncThunk<Video[]>(
 export const searchVideo = createAsyncThunk<Video[]>(
     'video/search',
     async (inputSearch) => {
-        const { data } = await myApi.get(`/video/search=${inputSearch}`)
+        const { data } = await myApi.get(`/video/search/${inputSearch}`)
         return data
     }
 )
