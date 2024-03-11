@@ -8,11 +8,14 @@ import { Link, useParams } from "react-router-dom";
 import { convertDate, convertNumber } from "../helpers/converters";
 import { Video } from "../Models/Video";
 import VideoCard from "../components/videoCard";
-import { Spinner } from "@chakra-ui/react";
 import Categories from "../components/categories";
 import { Comment } from "../Models/Comment";
+import React from "react";
 
 function VideoPage () {
+    const [show, setShow] = React.useState(false);
+    const handleToggle = () => setShow(!show);
+
     const video_id = useParams();
     const dispatch = useDispatch();
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
@@ -52,9 +55,15 @@ function VideoPage () {
                                 src={currentVideo?.channel.profilImg}
                             />
                             </span>
-                            <span className="text-sm">{currentVideo?.channel.firstname} {currentVideo?.channel.lastname}</span>
+                            <div>
+                                <div className="text-sm font-semibold">{currentVideo?.channel.firstname} {currentVideo?.channel.lastname}</div>
+                                <div className="text-sm">100 k followers</div>
+                            </div>
+                            <div>
+                                <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 me-2 mb-2 ml-4">Follow</button>
+                            </div>
                         </div>
-                        <span className="text-sm">
+                        <span className="text-sm font-semibold">
                             {currentVideo?.nbrVues !== undefined
                                 ? `${convertNumber(currentVideo.nbrVues)} vues`
                                 : "Unknown vues"}
@@ -83,6 +92,7 @@ function VideoPage () {
                             </svg>
                             <span>798</span>
                         </button>
+                        
                         <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
                             <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -136,17 +146,23 @@ function VideoPage () {
                             </svg>
                         </button>
                         </div>
-                    </div>             
+                    </div> 
+                    <div className="bg-slate-200 w-11/12 p-6 rounded-lg ml-8 mb-6">
+                        <p className="font-bold mb-2">Desctiption :</p>
+                        {currentVideo?.description}
+                    </div>           
                     <div className="space-y-6">
-                        <div className="flex items-center justify-between">
+                        <div className="flex ml-7 items-center justify-around w-11/12">
                             <h2 className="text-2xl font-bold">( {comments.length} ) Comments</h2>
                             <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
                                 Sort by
                             </button>
                         </div>
-                        <input
-                            className="flex h-10 border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-4/5 rounded-md border p-2 ml-10"
-                            placeholder="Add comment...." />
+                        <div className="flex justify-center">
+                            <input
+                                className="flex h-10 border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-4/5 rounded-md border p-2 ml-10"
+                                placeholder="Add comment...." />
+                        </div>
                         <div className="space-y-4">
                             <div className="flex items-start space-x-4">
                                 <div className="flex-1 ml-5">
