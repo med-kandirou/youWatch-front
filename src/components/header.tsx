@@ -12,9 +12,9 @@ function Header(){
     const [inputSearch, setInputSearch] = useState('');
     const dispatch= useDispatch();
 
-    // function search(){
-    //     dispatch(searchVideo(inputSearch))
-    // }
+    function search(){
+        dispatch(searchVideo(inputSearch))
+    }
 
     return( 
     <>
@@ -61,7 +61,7 @@ function Header(){
                 value={inputSearch}
                 onChange={e => setInputSearch(e.target.value)}
             />
-            <button onClick={()=>dispatch(searchVideo(inputSearch))}>
+            <button onClick={()=>search()}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
