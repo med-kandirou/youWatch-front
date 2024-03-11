@@ -11,20 +11,17 @@ import VideoCard from "../components/videoCard";
 import { Spinner } from "@chakra-ui/react";
 import Categories from "../components/categories";
 
-
 function VideoPage () {
     const video_id = useParams();
     const dispatch = useDispatch();
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
+    const comments=useSelector((state:RootState)=>state.currentVideo.comments)
     useEffect(() => {
         dispatch(getCurrentVideo(video_id.id)).then(() => {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
         });
     },[]);
-
-    
-
     return (
         <>
             <Header />
@@ -138,7 +135,7 @@ function VideoPage () {
                         </button>
                         </div>
                     </div>
-                        <Comments />
+                        <Comments {...comments}/>
                     </div>
                     <div>
                     <div className="flex flex-col space-y-4">
