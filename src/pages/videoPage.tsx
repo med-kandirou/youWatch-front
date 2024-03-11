@@ -10,12 +10,9 @@ import { Video } from "../Models/Video";
 import VideoCard from "../components/videoCard";
 import Categories from "../components/categories";
 import { Comment } from "../Models/Comment";
-import React from "react";
+import { Spinner } from "@chakra-ui/react";
 
 function VideoPage () {
-    const [show, setShow] = React.useState(false);
-    const handleToggle = () => setShow(!show);
-
     const video_id = useParams();
     const dispatch = useDispatch();
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
