@@ -17,7 +17,7 @@ function App() {
               <Route path="/watch/:id" element={<VideoPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/search" element={<SearchPage />} />
+              <Route path="/search/:inputSearch" element={<SearchPage />} />
             </Routes>
           </BrowserRouter >
         </ChakraProvider>
