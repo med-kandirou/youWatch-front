@@ -1,25 +1,34 @@
 import { useEffect } from "react";
 import Comments from "../components/comments";
 import Header from "../components/header"
-import { getCurrentVideo } from "../state/currentVideo/currentVideoActions";
+import { getCurrentVideo, getvideoByChannel } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../state/store";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { convertDate, convertNumber } from "../helpers/converters";
-// import Video from "../components/videoCard";
+import { Video } from "../Models/Video";
+import VideoCard from "../components/videoCard";
+import { Spinner } from "@chakra-ui/react";
+import Categories from "../components/categories";
 
 
 function VideoPage () {
     const video_id = useParams();
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getCurrentVideo(video_id.id))
-    }, []);
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
+    const videos=useSelector((state:RootState)=>state.currentVideo.videos)
+    useEffect(() => {
+        dispatch(getCurrentVideo(video_id.id)).then(() => {
+            dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
+        });
+    },[]);
+
+    
 
     return (
         <>
             <Header />
+            <Categories />
             <div className="max-w-screen-xl mx-auto mt-12">
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
@@ -134,16 +143,23 @@ function VideoPage () {
                     <div>
                     <div className="flex flex-col space-y-4">
                         <div className="flex items-center justify-between">
-                        <h2 className="text-lg font-semibold">À suivre</h2>
+                        <h2 className="text-lg font-semibold">À suivre ({videos?.length})</h2>
                         <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-                            Tout
+                            All
                         </button>
                         </div>
                         <div className="space-y-2">
                         <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full" data-v0-t="card">
                             <div className="p-6">
                                 <div className="space-x-4">
-                                    
+                                    {videos ? (
+                                    videos.map((v: Video) => 
+                                        <Link key={v.id} to={`/watch/${v.id}`}>
+                                            <VideoCard key={v.id} {...v} />
+                                        </Link>)
+                                    ) : (
+                                    <center><Spinner size='xl'/></center>
+                                    )}
                                 </div>
                             </div>
                         </div>

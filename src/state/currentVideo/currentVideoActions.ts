@@ -19,11 +19,11 @@ export const getCurrentVideo = createAsyncThunk<Video>(
 //     }
 // )
 
-// export const getvideoByChannel = createAsyncThunk<Video[]>(
-//     'video/getCommentByVideo',
-//     async (id_video) => {
-//         const { data } = await myApi.get(`/video/${id_video}`)
-//         return data
-//     }
-// )
+export const getvideoByChannel = createAsyncThunk<Video[]>(
+    'video/getvideoByChannel',
+    async (id_video) => {
+        const { data } = await myApi.get(`/video/channel/${id_video}`)
+        return data
+    }
+)
 
