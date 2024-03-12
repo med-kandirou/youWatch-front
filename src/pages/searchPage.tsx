@@ -26,13 +26,17 @@ function SearchPage(){
                                     style={{ maxWidth: "500px", maxHeight: "260px", width: "100%", height: "auto", objectFit: "cover" }}
                                     />
                                 <div>
-                                    <div>
+                                    <h3 className="text-sm pb-1 font-semibold">{v.title}</h3>
+                                    <div className="flex">
                                         <img src={v.channel.profilImg} alt="..." className="shadow rounded-full h-12 mr-3 align-middle border-none" />
+                                        <div>
+                                            <h3 className="text-sm pb-1 text-gray-600">{v.channel.firstname} {v.channel.lastname}</h3>
+                                            <p className="text-xs pb-1 text-gray-600">{convertNumber(v.nbrVues)} de vues • il y a {convertDate(v.datePosting)}</p>
+                                        </div>
+                                        
                                     </div>
                                     <div>
-                                        <h3 className="text-sm pb-1 font-semibold">{v.title}</h3>
-                                        <h3 className="text-sm pb-1 text-gray-600">{v.channel.firstname} {v.channel.lastname}</h3>
-                                        <p className="text-xs pb-1 text-gray-600">{convertNumber(v.nbrVues)} de vues • il y a {convertDate(v.datePosting)}</p>
+                                        
                                         <p className="text-xs pb-1 text-gray-600">{v.description}</p>
                                     </div>
                                 </div>

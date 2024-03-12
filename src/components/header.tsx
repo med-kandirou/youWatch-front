@@ -5,18 +5,16 @@ import { RootState } from "../state/store";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { searchVideo } from "../state/videoo/videoActions";
-
-
+import { useNavigate } from "react-router-dom";
 function Header(){
-
     const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
     const [inputSearch, setInputSearch] = useState('');
     const dispatch= useDispatch();
-
+    const navigate = useNavigate();
     function search(){
         dispatch(searchVideo(inputSearch))
+        navigate("/search/"+inputSearch)
     }
-
     return( 
     <>
         <div className="flex items-center justify-between px-4 py-2">
