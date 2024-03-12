@@ -187,12 +187,12 @@ function VideoPage () {
                             <div className="p-6">
                                 <div className="space-x-4">
                                     {videos ? (
-                                    videos.map((v: Video) => 
-                                        <Link key={v.id} to={`/watch/${v.id}`}>
-                                            <VideoCard key={v.id} {...v} />
-                                        </Link>)
-                                    ) : (
-                                    <center><Spinner size='xl'/></center>
+                                        videos.map((v: Video) => 
+                                            <Link key={v.id} to={`/watch/${v.id}`}>
+                                                <VideoCard key={v.id} {...v} />
+                                            </Link>)
+                                        ) : (
+                                        <center><Spinner size='xl'/></center>
                                     )}
                                 </div>
                             </div>

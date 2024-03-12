@@ -11,7 +11,7 @@ import { searchVideo } from "../state/videoo/videoActions";
 
 function SearchPage(){
     const dispatch= useDispatch()
-    let {inputSearch} = useParams();
+    const {inputSearch} = useParams();
     const videos=useSelector((state: RootState) => state.videos.videos);
     useEffect(() => {
         dispatch(searchVideo(inputSearch))

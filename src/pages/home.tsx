@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Categories from "../components/categories";
 import Header from "../components/header";
 import SideBarLeft from "../components/sideBarLeft";
-import { useEffect } from "react";
+import { useEffect} from "react";
 import { getAllvideos } from "../state/videoo/videoActions";
 import { RootState } from "../state/store";
 import { Video } from "../Models/Video";
@@ -12,12 +12,12 @@ import { Spinner } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 
-  
 function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
       dispatch(getAllvideos(0))
   }, []);
+
   const videos=useSelector((state:RootState)=>state.videos.videos.content)
     return (
       <>
@@ -28,6 +28,22 @@ function Home() {
                     <div>
                         <Categories />
                         <div className="grid grid-cols-3 gap-4 p-4">
+                        {/* <InfiniteScroll
+                          dataLength={videos.length}
+                          next={fetchMoreData(1)}
+                          hasMore={hasMore}
+                          loader={<Spinner size='xl'/>}>
+                          <div className='container'>
+                            <div className='row'>
+                              {videos &&
+                                videos.map((v: Video) => 
+                                  <Link key={v.id} to={`/watch/${v.id}`}>
+                                    <VideoCard key={v.id} {...v} />
+                                  </Link>
+                                )}
+                            </div>
+                          </div>
+                        </InfiniteScroll> */}
                         {videos ? (
                           videos.map((v: Video) => 
                             <Link key={v.id} to={`/watch/${v.id}`}>
