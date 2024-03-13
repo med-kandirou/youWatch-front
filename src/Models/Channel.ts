@@ -5,6 +5,7 @@ export interface Channel{
     creationDate:Date;
     profilImg:string;
     coverImg:string;
+    nbrFollowers:number;
     email:string;
     role:string;
 }

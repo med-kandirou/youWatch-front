@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/header";
 import SideBarLeft from "../components/sideBarLeft";
-import { RootState } from "../state/store";
+import { RootState, appDispatch } from "../state/store";
 import { Video } from "../Models/Video";
 import { convertDate, convertNumber } from "../helpers/converters";
 import { Link, useParams } from "react-router-dom";
@@ -10,7 +10,7 @@ import { searchVideo } from "../state/videoo/videoActions";
 
 
 function SearchPage(){
-    const dispatch= useDispatch()
+    const dispatch= useDispatch<appDispatch>()
     const {inputSearch} = useParams();
     const videos=useSelector((state: RootState) => state.videos.videos);
     useEffect(() => {

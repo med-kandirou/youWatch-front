@@ -3,7 +3,7 @@ import Comments from "../components/comments";
 import Header from "../components/header"
 import { getCommentByVideo, getCurrentVideo, getvideoByChannel } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../state/store";
+import { RootState, appDispatch } from "../state/store";
 import { Link, useParams } from "react-router-dom";
 import { convertDate, convertNumber } from "../helpers/converters";
 import { Video } from "../Models/Video";
@@ -14,7 +14,7 @@ import { Spinner } from "@chakra-ui/react";
 
 function VideoPage () {
     const video_id = useParams();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<appDispatch>();
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const comments=useSelector((state:RootState)=>state.currentVideo.comments)
@@ -54,7 +54,7 @@ function VideoPage () {
                             </span>
                             <div>
                                 <div className="text-sm font-semibold">{currentVideo?.channel.firstname} {currentVideo?.channel.lastname}</div>
-                                <div className="text-sm">100 k followers</div>
+                                <div className="text-sm">{convertNumber(currentVideo?.channel.nbrFollowers)} followers</div>
                             </div>
                             <div>
                                 <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 me-2 mb-2 ml-4">Follow</button>
@@ -87,7 +87,7 @@ function VideoPage () {
                             <path d="M7 10v12"></path>
                             <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"></path>
                             </svg>
-                            <span>798</span>
+                            <span>{currentVideo?.nbrLikes}</span>
                         </button>
                         <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
                             <svg

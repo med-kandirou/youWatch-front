@@ -2,11 +2,11 @@ import { Button } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { getAllCategories } from "../state/categories/categorieActions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../state/store";
+import { RootState, appDispatch } from "../state/store";
 
 
 function Categories(){
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<appDispatch>();
     useEffect(() => {
         dispatch(getAllCategories())
     }, []);

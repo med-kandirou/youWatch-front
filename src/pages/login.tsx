@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { channelLogin } from "../state/channel/channelActions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { appDispatch } from "../state/store";
 
 function Login() {
   const {
@@ -25,12 +26,10 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<appDispatch>();
 
   function onSubmit(data:object) {
-    dispatch(channelLogin(data)).then((res:string) => {
-      console.log(res);
-    }); 
+    dispatch(channelLogin(data))
   }
 
   return (

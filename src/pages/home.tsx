@@ -5,7 +5,7 @@ import Header from "../components/header";
 import SideBarLeft from "../components/sideBarLeft";
 import { useEffect} from "react";
 import { getAllvideos } from "../state/videoo/videoActions";
-import { RootState } from "../state/store";
+import { RootState, appDispatch } from "../state/store";
 import { Video } from "../Models/Video";
 import VideoCard from "../components/videoCard";
 import { Spinner } from "@chakra-ui/react";
@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 
 function Home() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<appDispatch>();
   useEffect(() => {
       dispatch(getAllvideos(0))
   }, []);

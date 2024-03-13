@@ -9,6 +9,7 @@ export interface Video{
     thumbnail:string;
     datePosting:Date;
     nbrVues:number;
+    nbrLikes:number;
     category:Category;
     channel:Channel;
 }

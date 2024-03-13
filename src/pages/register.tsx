@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import { channelregister } from '../state/channel/channelActions';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { appDispatch } from '../state/store';
 
   function Register() {
     const {
@@ -21,12 +22,10 @@ import { Link } from 'react-router-dom';
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<appDispatch>();
 
     function onSubmit(data:object) {
-        dispatch(channelregister(data)).then((res:string) => {
-            console.log(res);
-        }); 
+        dispatch(channelregister(data))
     }
 
     return(
