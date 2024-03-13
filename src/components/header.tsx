@@ -1,6 +1,5 @@
 
 import { useSelector } from "react-redux";
-import SideBarRight from "./sideBarRight";
 import { RootState } from "../state/store";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -138,7 +137,7 @@ function Header(){
             </svg>
             <div className="flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full">
                 {isAuth ? (
-                    <SideBarRight />
+                    <Link to="/myProfile" className="text-white">KN</Link>
                 ) : (
                     <Link to="/login" className="text-white">KN</Link>
                 )}

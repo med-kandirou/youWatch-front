@@ -13,7 +13,7 @@ interface channelState {
 const initialState:channelState={
     channel:null,
     token:localStorage.getItem('token') || null,
-    isAuth:false,
+    isAuth:true,
     error:'',
     loading:false
 }
