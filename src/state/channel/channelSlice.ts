@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Channel } from "../../Models/Channel";
-import { channelLogin, channelregister } from "./channelActions";
+import { channelLogin, channelregister, getchannelById } from "./channelActions";
 
 interface channelState {
-    channel:Channel | null
+    channel:Channel | null,
+    searchedChannel:Channel | null,
     token:string | null;
     isAuth:boolean,
     error:string,
@@ -12,6 +13,7 @@ interface channelState {
 
 const initialState:channelState={
     channel:null,
+    searchedChannel:null,
     token:localStorage.getItem('token') || null,
     isAuth:false,
     error:'',
@@ -43,6 +45,10 @@ const channelSlice = createSlice({
         });
         builder.addCase(channelregister.pending, (state) => {
             state.isAuth = true;
+        });
+        //getChannelbyId
+        builder.addCase(getchannelById.fulfilled, (state, action) => {
+            state.searchedChannel=action.payload
         });
     },
     reducers:{}

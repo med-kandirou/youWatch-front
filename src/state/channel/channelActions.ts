@@ -25,3 +25,12 @@ export const channelregister = createAsyncThunk<Channel>(
         }
     }
 )
+
+
+export const getchannelById = createAsyncThunk<Channel>(
+    'channel/getOne',
+    async (channelCredentials) => {
+        const { data } = await myApi.get(`/channel/${channelCredentials}`)
+        return data
+    }
+)
