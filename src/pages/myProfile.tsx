@@ -19,6 +19,7 @@ function MyProfile(){
     }, []);
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const vues=useSelector((state:RootState)=>state.videos.vues)
+    const channel=useSelector((state:RootState)=>state.channel.channel)
 
     return (
         <>
@@ -94,17 +95,17 @@ function MyProfile(){
                                             <Stack spacing="5">
                                                 <FormControl>
                                                     <FormLabel >First Name</FormLabel>
-                                                    <Input id="firstname" className="rounded-md border-gray-300" type="text" {...register("firstname", { required: true })} />
+                                                    <Input id="firstname" className="rounded-md border-gray-300" type="text" value={channel?.firstname} {...register("firstname", { required: true })} />
                                                     {errors.firstname && <p className="text-red-500">First name is required</p>}
                                                 </FormControl>
                                                 <FormControl>
                                                     <FormLabel>Last Name</FormLabel>
-                                                    <Input id="lastname" className="rounded-md border-gray-300" type="text" {...register("lastname", { required: true })} />
+                                                    <Input id="lastname" className="rounded-md border-gray-300" type="text" value={channel?.lastname} {...register("lastname", { required: true })} />
                                                     {errors.lastname && <p className="text-red-500">Last name is required</p>}
                                                 </FormControl>  
                                                 <FormControl>
                                                     <FormLabel>Email</FormLabel>
-                                                    <Input id="email" className="rounded-md border-gray-300" type="email" {...register("email", { required: true })}/>
+                                                    <Input id="email" className="rounded-md border-gray-300" type="email" value={channel?.email} {...register("email", { required: true })}/>
                                                     {errors.email && <p className="text-red-500">Email is required</p>}
                                                 </FormControl>
                                                 <FormControl>
