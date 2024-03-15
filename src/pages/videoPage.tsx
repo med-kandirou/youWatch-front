@@ -41,6 +41,13 @@ function VideoPage () {
             isClosable: true,
           })
     }
+    function comment(){
+        isAuth ? console.log(isAuth) : toast({
+            title: `Login first`,
+            variant: 'top-accent',
+            isClosable: true,
+          })
+    }
 
     return (
         <>
@@ -177,7 +184,8 @@ function VideoPage () {
                         <div className="flex justify-center">
                             <input
                                 className="flex h-10 border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-4/5 rounded-md border p-2 ml-10"
-                                placeholder="Add comment...." />
+                                placeholder="Add comment...." /> 
+                                <button onClick={()=>comment()} type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2 me-2 ml-2">Comment</button>
                         </div>
                         <div className="space-y-4">
                             <div className="flex items-start space-x-4">
