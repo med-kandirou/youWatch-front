@@ -2,14 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { Channel } from "../../Models/Channel"
 import myApi from "../../helpers/myApi"
 
-export const channelLogin = createAsyncThunk<string>(
+export const channelLogin = createAsyncThunk<{token :string, channel :Channel, done : boolean}>(
     'auth/login',
-    async (channelCredentials,{ rejectWithValue }) => {
+    async (channelCredentials) => {
         try {
             const { data } = await myApi.post('/auth/login',channelCredentials)
-            return data
+            return {done : true,channel : data.channel, token : data.token}
         } catch (error) {
-            return rejectWithValue("Email or password incorrect")
+            return {done : false} as {token :string,channel :Channel, done : boolean}
         }
     }
 )

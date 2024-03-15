@@ -10,15 +10,15 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 
 
 import { useForm } from "react-hook-form";
 import { channelLogin } from "../state/channel/channelActions";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { appDispatch } from "../state/store";
-
+import { Link, useNavigate } from "react-router-dom";
+import {  appDispatch } from "../state/store";
 function Login() {
   const {
     register,
@@ -27,9 +27,22 @@ function Login() {
   } = useForm();
 
   const dispatch = useDispatch<appDispatch>();
-
-  function onSubmit(data:object) {
-    dispatch(channelLogin(data))
+  const toast = useToast()
+  const navigate = useNavigate();
+  function onSubmit(data: object) {
+    dispatch(channelLogin(data)).unwrap().then((res) => {
+      const toastConfig = {
+        description: res.done ? 'Login success' : 'Email or password is incorrect.',
+        status: res.done ? 'success' : 'error',
+        position: 'top-right',
+        duration: 9000,
+        isClosable: true,
+      };
+      toast(toastConfig);
+      if(res.done){
+        navigate("/")
+      }
+    });
   }
 
   return (
@@ -133,3 +146,5 @@ function Login() {
 }
 
 export default Login;
+
+

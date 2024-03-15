@@ -13,7 +13,7 @@ interface channelState {
 const initialState:channelState={
     channel:null,
     token:localStorage.getItem('token') || null,
-    isAuth:true,
+    isAuth:false,
     error:'',
     loading:false
 }
@@ -24,13 +24,14 @@ const channelSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(channelLogin.fulfilled, (state, action) => {
             state.isAuth = true;
-            state.token = action.payload;
+            state.token = action.payload.token;
+            state.channel = action.payload.channel;
         });
         builder.addCase(channelLogin.rejected, (state,action) => {
             state.error = action.payload as string;
         });
         builder.addCase(channelLogin.pending, (state) => {
-            state.isAuth = true;
+            state.isAuth = false;
         });
         //register
         builder.addCase(channelregister.fulfilled, (state, action) => {

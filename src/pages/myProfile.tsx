@@ -71,15 +71,15 @@ function MyProfile(){
                             </div>
                             <div className="text-center mt-12 mb-5">
                                 <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2">
-                                    Jenna Stones
+                                    {channel?.firstname} {channel?.lastname}
                                 </h3>
                                 <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                                 <i className="fas fa-envelope mr-2 text-lg text-blueGray-400"></i>
-                                    Los Angeles, California
+                                    {channel?.email}
                                 </div>
                                 <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                                 <i className="fa fa-calendar mr-2 text-lg text-blueGray-400"></i>
-                                    2001/23/09
+                                    {channel?.creationDate.toString()}
                                 </div>
                             </div>
                             <Tabs isFitted variant='enclosed'>
