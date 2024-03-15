@@ -7,15 +7,18 @@ import { RootState, appDispatch } from "../state/store";
 import { Video } from "../Models/Video";
 import VideoCard from "../components/videoCard";
 import { Link } from "react-router-dom";
+import { findVueByChannelId } from "../state/videoo/videoActions";
+import { Vue } from "../Models/Vue";
 
 function MyProfile(){
     const {register,handleSubmit,formState: { errors }} = useForm();
-    const channelId=useSelector((state:RootState)=>state.channel.channel?.id)
     const dispatch = useDispatch<appDispatch>();
     useEffect(() => {
         dispatch(getvideoByChannel(localStorage.getItem('id_channel')))
+        dispatch(findVueByChannelId(localStorage.getItem('id_channel')))
     }, []);
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
+    const vues=useSelector((state:RootState)=>state.videos.vues)
 
     return (
         <>
@@ -134,7 +137,16 @@ function MyProfile(){
                                     </div>
                                     </TabPanel>
                                     <TabPanel>
-                                        <p>three!</p>
+                                    <div className="grid grid-cols-3 gap-4 p-4">
+                                    {vues ? (
+                                        vues.map((v: Vue) => 
+                                            <Link key={v.video_channel_id.video.id} to={`/watch/${v.video_channel_id.video.id}`}>
+                                                <VideoCard key={v.video_channel_id.video.id} {...v.video_channel_id.video} />
+                                            </Link>)
+                                        ) : (
+                                        <center><Spinner size='xl'/></center>
+                                        )}
+                                    </div>
                                     </TabPanel>
                                 </TabPanels>
                                 </Tabs>

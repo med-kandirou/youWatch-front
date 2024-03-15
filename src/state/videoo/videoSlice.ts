@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Video } from "../../Models/Video";
-import { getAllvideos, searchVideo } from "./videoActions";
+import { findVueByChannelId, getAllvideos, searchVideo } from "./videoActions";
+import { Vue } from "../../Models/Vue";
 
 
 interface videoState {
-    videos:Video[] | null
+    videos:Video[] | null,
+    vues:Vue[] | null
 }
 
 const initialState:videoState={
-    videos:[]
+    videos:[],
+    vues:[]
 }
 
 const videoSlice = createSlice({
@@ -21,6 +24,10 @@ const videoSlice = createSlice({
         //search
         builder.addCase(searchVideo.fulfilled, (state, action) => {
             state.videos = action.payload;
+        });
+        //findVueByChannelId
+        builder.addCase(findVueByChannelId.fulfilled, (state, action) => {
+            state.vues = action.payload;
         });
     },
     reducers:{}

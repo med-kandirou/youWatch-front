@@ -188,7 +188,7 @@ function VideoPage () {
                                 <div className="space-x-4">
                                     {videos ? (
                                         videos.map((v: Video) => 
-                                            <Link key={v.id} to={`/watch/${v.id}`}>
+                                            <Link key={v.id} className="mb-3" to={`/watch/${v.id}`}>
                                                 <VideoCard key={v.id} {...v} />
                                             </Link>)
                                         ) : (
