@@ -10,7 +10,7 @@ import { Video } from "../Models/Video";
 import VideoCard from "../components/videoCard";
 import Categories from "../components/categories";
 import { Comment } from "../Models/Comment";
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, useToast } from "@chakra-ui/react";
 
 function VideoPage () {
     const video_id = useParams();
@@ -18,12 +18,30 @@ function VideoPage () {
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const comments=useSelector((state:RootState)=>state.currentVideo.comments)
+    const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
     useEffect(() => {
         dispatch(getCurrentVideo(video_id.id)).then(() => {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
             dispatch(getCommentByVideo(video_id.id));
         });
     },[video_id]);
+
+    const toast = useToast()
+    function follow(){
+        isAuth ? console.log(isAuth) : toast({
+            title: `Login first`,
+            variant: 'top-accent',
+            isClosable: true,
+          })
+    }
+    function react(){
+        isAuth ? console.log(isAuth) : toast({
+            title: `Login first`,
+            variant: 'top-accent',
+            isClosable: true,
+          })
+    }
+
     return (
         <>
             <Header />
@@ -46,18 +64,20 @@ function VideoPage () {
                         <div className="flex items-center justify-between py-2">
                         <div className="flex items-center space-x-2">
                             <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-                            <img
-                                className="aspect-square h-full w-full"
-                                alt="Sparkle Beats"
-                                src={currentVideo?.channel.profilImg}
-                            />
+                            <Link to={`/profile/${currentVideo?.channel.id}`}>
+                                <img
+                                    className="aspect-square h-full w-full"
+                                    alt="Sparkle Beats"
+                                    src={currentVideo?.channel.profilImg}
+                                />
+                            </Link>      
                             </span>
                             <div>
                                 <div className="text-sm font-semibold">{currentVideo?.channel.firstname} {currentVideo?.channel.lastname}</div>
                                 <div className="text-sm">{convertNumber(currentVideo?.channel.nbrFollowers)} followers</div>
                             </div>
                             <div>
-                                <button type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 me-2 mb-2 ml-4">Follow</button>
+                                <button onClick={()=>follow()} type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 me-2 mb-2 ml-4">Follow</button>
                             </div>
                         </div>
                         <span className="text-sm font-semibold">
@@ -72,7 +92,7 @@ function VideoPage () {
                             </span>
                         </div>
                         <div className="flex items-center space-x-4">
-                        <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
+                        <button onClick={()=>react()} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
                             <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -89,7 +109,7 @@ function VideoPage () {
                             </svg>
                             <span>{currentVideo?.nbrLikes}</span>
                         </button>
-                        <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
+                        <button onClick={()=>react()} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
                             <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -121,7 +141,7 @@ function VideoPage () {
                             <polyline points="16 6 12 2 8 6"></polyline>
                             <line x1="12" x2="12" y1="2" y2="15"></line>
                             </svg>
-                            <span>Partager</span>
+                            <span>share</span>
                         </button>
                         <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
                             <svg
