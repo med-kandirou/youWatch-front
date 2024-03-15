@@ -8,12 +8,13 @@ import {
     Input,
     Stack,
     Text,
-  } from '@chakra-ui/react'
+    useToast,
+} from '@chakra-ui/react'
 
 import { useForm } from 'react-hook-form';
 import { channelregister } from '../state/channel/channelActions';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { appDispatch } from '../state/store';
 
   function Register() {
@@ -23,9 +24,19 @@ import { appDispatch } from '../state/store';
         formState: { errors },
     } = useForm();
     const dispatch = useDispatch<appDispatch>();
-
+    const navigate = useNavigate();
+    const toast = useToast();
     function onSubmit(data:object) {
-        dispatch(channelregister(data))
+        dispatch(channelregister(data));
+        const toastConfig = {
+            description: 'Register success',
+            status: 'success',
+            position: 'top-right',
+            duration: 9000,
+            isClosable: true,
+          };
+        toast(toastConfig);
+        navigate("/login")
     }
 
     return(
