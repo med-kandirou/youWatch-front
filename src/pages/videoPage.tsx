@@ -23,7 +23,7 @@ function VideoPage () {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
             dispatch(getCommentByVideo(video_id.id));
         });
-    },[]);
+    },[video_id]);
     return (
         <>
             <Header />
