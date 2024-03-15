@@ -150,24 +150,6 @@ function VideoPage () {
                             </svg>
                             <span>share</span>
                         </button>
-                        <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                            <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeWidth="round"
-                            className="w-6 h-6"
-                            >
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M17 12h.01"></path>
-                            <path d="M12 12h.01"></path>
-                            <path d="M7 12h.01"></path>
-                            </svg>
-                        </button>
                         </div>
                     </div> 
                     <div className="bg-slate-200 w-11/12 p-6 rounded-lg ml-8 mb-6">

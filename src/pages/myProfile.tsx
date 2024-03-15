@@ -9,6 +9,7 @@ import VideoCard from "../components/videoCard";
 import { Link } from "react-router-dom";
 import { findVueByChannelId } from "../state/videoo/videoActions";
 import { Vue } from "../Models/Vue";
+import AddVideo from "../components/addVideo";
 
 function MyProfile(){
     const {register,handleSubmit,formState: { errors }} = useForm();
@@ -28,7 +29,7 @@ function MyProfile(){
                     <main className="profile-page">
                     <section className="relative block h-500-px">
                     <div className="absolute top-0 w-full h-full bg-center bg-cover" style={{
-                        backgroundImage: `url(${channel?.profilImg})`
+                        backgroundImage: `url(${channel?.coverImg})`
                     }}>
                         <span id="blackOverlay" className="w-full h-full absolute opacity-50 bg-black"></span>
                         </div>
@@ -45,14 +46,15 @@ function MyProfile(){
                             <div className="flex flex-wrap justify-center">
                                 <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                 <div className="relative">
-                                    <img alt="..." src={channel?.profilImg} className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
+                                    <img alt="..." src={channel?.profilImg} className="shadow-xl block rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
                                 </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                                 <div className="py-6 px-3 mt-32 sm:mt-0">
-                                    <button className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
-                                    Connect
-                                    </button>
+                                    {/* <button className="bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
+                                        Add video
+                                    </button> */}
+                                    <AddVideo />
                                 </div>
                                 </div>
                                 <div className="w-full lg:w-4/12 px-4 lg:order-1">
@@ -93,6 +95,16 @@ function MyProfile(){
                                     <Stack spacing="6">
                                         <form >
                                             <Stack spacing="5">
+                                                <FormControl className="flex flex-col items-center justify-center">
+                                                    <FormLabel>Profile image</FormLabel>
+                                                    <img alt="..." src={channel?.profilImg} className="shadow-xl block rounded-full w-32 h-32 border-none mb-2" />
+                                                    <input className="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-non" id="file_input" type="file" />
+                                                </FormControl>
+                                                <FormControl className="flex flex-col items-center justify-center">
+                                                    <FormLabel >Cover image</FormLabel>
+                                                    <img alt="..." src={channel?.coverImg} className="shadow-xl block rounded-full w-32 h-32 border-none mb-2" />
+                                                    <input className="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-non" id="file_input" type="file" />
+                                                </FormControl>
                                                 <FormControl>
                                                     <FormLabel >First Name</FormLabel>
                                                     <Input id="firstname" className="rounded-md border-gray-300" type="text" value={channel?.firstname} {...register("firstname", { required: true })} />
@@ -109,14 +121,8 @@ function MyProfile(){
                                                     {errors.email && <p className="text-red-500">Email is required</p>}
                                                 </FormControl>
                                                 <FormControl>
-                                                    <FormLabel>Password</FormLabel>
-                                                    <Input id="password" className="rounded-md border-gray-300" type="password" {...register("password", { required: true })}/>
-                                                    {errors.password && <p className="text-red-500">Password is required</p>}
-                                                </FormControl>
-                                                <FormControl>
-                                                    <FormLabel >Confirmation password</FormLabel>
-                                                    <Input id="cpassword" type="password" className="rounded-md border-gray-300" {...register("cpassword", { required: true })}/>
-                                                    {errors.cpassword && <p className="text-red-500">Confirmation password is required</p>}
+                                                    <FormLabel >Password</FormLabel>
+                                                    <Input id="password" type="password" className="rounded-md border-gray-300" {...register("password")}/>
                                                 </FormControl>
                                             </Stack>
                                             <Stack spacing="6" className="mt-10">
