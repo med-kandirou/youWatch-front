@@ -14,7 +14,7 @@ export const uploadThumbnail = createAsyncThunk<{ url: string; done: boolean }, 
 );
 
 
-export const uploadVideo = createAsyncThunk<{url:string,done:boolean}>(
+export const uploadVideo = createAsyncThunk<{url:string,done:boolean}, FormData>(
     'file/upload-video',
     async (file) => {
         try {
