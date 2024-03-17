@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { uploadImage } from "./fileActions";
+import { uploadThumbnail, uploadVideo } from "./fileActions";
 
 interface fileState {
     file:string | null,
@@ -14,10 +14,13 @@ const channelSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         //upload Image
-        builder.addCase(uploadImage.fulfilled, (state, action) => {
+        builder.addCase(uploadThumbnail.fulfilled, (state, action) => {
             state.file = action.payload.url;
         });
         //upload video
+        builder.addCase(uploadVideo.fulfilled, (state, action) => {
+            state.file = action.payload.url;
+        });
     },
     reducers:{}
 });

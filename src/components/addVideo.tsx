@@ -19,6 +19,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { appDispatch } from "../state/store";
+import { uploadThumbnail } from "../state/file/fileActions";
 
 function AddVideo() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,11 +29,14 @@ function AddVideo() {
     onOpen();
   };
 
-  const {register,handleSubmit,formState: { errors },} = useForm();
+  const {register,handleSubmit,formState: { errors }} = useForm();
   const dispatch = useDispatch<appDispatch>();
 
-  function onSubmit(data:object) {
-      console.log(data);
+  async function onSubmit(data:object) {
+    const formData = new FormData();
+    formData.append('file', data.thumbnail);
+    const response = await dispatch(uploadThumbnail(formData));
+    console.log(response.payload); 
   }
 
   return (
