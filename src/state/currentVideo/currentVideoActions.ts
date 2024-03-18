@@ -28,3 +28,21 @@ export const getvideoByChannel = createAsyncThunk<Video[]>(
     }
 )
 
+
+
+export const saveComment = createAsyncThunk<Comment, { videoId: string; channelId: string; content: string }>(
+    'video/savecomment',
+    async ({ videoId, channelId, content }) => {
+        const token = localStorage.getItem('token');
+        const { data } = await myApi.post(`/comment`,{
+            'videoId':1,
+            'channelId':1,
+            'content':"content"
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    }
+)

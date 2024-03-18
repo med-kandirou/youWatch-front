@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Spinner, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, Spinner, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, useToast } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { getvideoByChannel } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { findVueByChannelId } from "../state/videoo/videoActions";
 import { Vue } from "../Models/Vue";
 import AddVideo from "../components/addVideo";
+import { uploadThumbnail } from "../state/file/fileActions";
 
 function MyProfile(){
     const {register,handleSubmit,formState: { errors }} = useForm();
@@ -21,6 +22,23 @@ function MyProfile(){
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const vues=useSelector((state:RootState)=>state.videos.vues)
     const channel=useSelector((state:RootState)=>state.channel.channel)
+    async function onUpdate(data:object) {
+
+        // const formthumbnail = new FormData();
+        // formthumbnail.append('file', data.thumbnail[0]);
+        // const urlThumbnail = await dispatch(uploadThumbnail(formthumbnail));
+        // const formvideo = new FormData();
+        // formvideo.append('file', data.link[0]);
+        // const urlvideo = await dispatch(uploadVideo(formvideo));
+        // data.thumbnail=urlThumbnail.payload.url;
+        // data.link=urlvideo.payload.url;
+        // console.log(data);
+        
+        // dispatch(addVideo(data)).then(()=>{
+        //   dispatch(getvideoByChannel(localStorage.getItem('channelId')))
+        // });
+        console.log(data)
+      }
 
     return (
         <>
@@ -90,17 +108,17 @@ function MyProfile(){
                                 <TabPanels>
                                     <TabPanel>
                                     <Stack spacing="6">
-                                        <form >
+                                        <form onSubmit={handleSubmit(onUpdate)}>
                                             <Stack spacing="5">
                                                 <FormControl className="flex flex-col items-center justify-center">
                                                     <FormLabel>Profile image</FormLabel>
                                                     <img alt="..." src={channel?.profilImg} className="shadow-xl block rounded-full w-32 h-32 border-none mb-2" />
-                                                    <input className="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-non" id="file_input" type="file" />
+                                                    <input className="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-non" id="profile" type="file" {...register("profilImg")} />
                                                 </FormControl>
                                                 <FormControl className="flex flex-col items-center justify-center">
                                                     <FormLabel >Cover image</FormLabel>
                                                     <img alt="..." src={channel?.coverImg} className="shadow-xl block rounded-full w-32 h-32 border-none mb-2" />
-                                                    <input className="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-non" id="file_input" type="file" />
+                                                    <input className="text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-non" id="cover" type="file" {...register("coverImg")}/>
                                                 </FormControl>
                                                 <FormControl>
                                                     <FormLabel >First Name</FormLabel>

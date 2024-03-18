@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Comments from "../components/comments";
 import Header from "../components/header"
-import { getCommentByVideo, getCurrentVideo, getvideoByChannel } from "../state/currentVideo/currentVideoActions";
+import { getCommentByVideo, getCurrentVideo, getvideoByChannel, saveComment } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, appDispatch } from "../state/store";
 import { Link, useParams } from "react-router-dom";
@@ -14,11 +14,13 @@ import { Spinner, useToast } from "@chakra-ui/react";
 
 function VideoPage () {
     const video_id = useParams();
+    const [content,setContent] = useState();
     const dispatch = useDispatch<appDispatch>();
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const comments=useSelector((state:RootState)=>state.currentVideo.comments)
     const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
+    const channelId=useSelector((state:RootState)=>state.channel.channel?.id)
     useEffect(() => {
         dispatch(getCurrentVideo(video_id.id)).then(() => {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
@@ -42,7 +44,9 @@ function VideoPage () {
           })
     }
     function comment(){
-        isAuth ? console.log(isAuth) : toast({
+        isAuth ? 
+        dispatch(saveComment(currentVideo?.id,channelId,content))
+        : toast({
             title: `Login first`,
             variant: 'top-accent',
             isClosable: true,
@@ -167,7 +171,7 @@ function VideoPage () {
                         <div className="flex justify-center">
                             <input
                                 className="flex h-10 border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-4/5 rounded-md border p-2 ml-10"
-                                placeholder="Add comment...." /> 
+                                placeholder="Add comment...." onChange={(e)=>{setContent(e.target.value)}} /> 
                                 <button onClick={()=>comment()} type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2 me-2 ml-2">Comment</button>
                         </div>
                         <div className="space-y-4">
