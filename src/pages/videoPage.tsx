@@ -57,14 +57,16 @@ function VideoPage () {
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-2">
                     <div className="aspect-w-16 aspect-h-9 bg-white">
-                        <iframe 
-                            src={currentVideo?.link}
-                            width="640"
-                            className="w-full rounded-md ml-2"
-                            height="360"
-                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                            style={{ aspectRatio: "320 / 180", objectFit: "cover" }}
-                         ></iframe>
+                    <video 
+                        src={currentVideo?.link}
+                        width="600"
+                        height="320"
+                        className="w-full rounded-md ml-2"
+                        //allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                        autoPlay
+                        controls
+                        style={{ aspectRatio: "16/9", objectFit: "cover" }}
+                    ></video>
                     </div>
                     <div className="flex flex-col p-4">
                         <h1 className="text-2xl font-bold">{currentVideo?.title}</h1>

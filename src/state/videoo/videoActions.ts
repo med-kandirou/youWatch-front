@@ -36,7 +36,7 @@ export const findVueByChannelId = createAsyncThunk<Vue[]>(
 )
 
 
-export const addVideo = createAsyncThunk<Video>(
+export const addVideo = createAsyncThunk<{video:Video},object>(
     'video/addVideo',
     async (video) => {
         // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdG5hbWUiOiJ1c2VyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJG5MeWtzOWNmUUNPMXdnQ1FnQ0UvV2VCOXBuNU1TSlFPd2JDeS5CS0FZWi9JbnRQem4xVG55Iiwicm9sZSI6IlVTRVIiLCJsYXN0bmFtZSI6IkRvZSIsInN1YiI6InVzZXJAZ21haWwuY29tIiwiaWF0IjoxNzEwNDk2MDIyLCJleHAiOjE3MTA0OTc0NjJ9.ckihyIdrKXCtschmUkNU2jIPTEfVLoh4BixamlxgYJE';

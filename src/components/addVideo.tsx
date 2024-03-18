@@ -17,19 +17,19 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { appDispatch } from "../state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, appDispatch } from "../state/store";
 import { uploadThumbnail, uploadVideo } from "../state/file/fileActions";
 import { addVideo } from "../state/videoo/videoActions";
 
 function AddVideo() {
+  const channelId=useSelector((state:RootState)=>state.channel.channel?.id)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
-  const handleSizeClick = (newSize) => {
+  const handleSizeClick = (newSize: React.SetStateAction<string>) => {
     setSize(newSize);
     onOpen();
   };
-
   const {register,handleSubmit,formState: { errors }} = useForm();
   const dispatch = useDispatch<appDispatch>();
 
@@ -38,9 +38,14 @@ function AddVideo() {
     formthumbnail.append('file', data.thumbnail[0]);
     const urlThumbnail = await dispatch(uploadThumbnail(formthumbnail));
     const formvideo = new FormData();
-    formvideo.append('file', data.video[0]);
+    formvideo.append('file', data.link[0]);
     const urlvideo = await dispatch(uploadVideo(formvideo));
-    dispatch(addVideo(formvideo)).then(res=>{
+
+    data.thumbnail=urlThumbnail.payload.url;
+    data.link=urlvideo.payload.url;
+    console.log(data);
+    
+    dispatch(addVideo(data)).then(res=>{
       console.log(res)
     });
   }
@@ -120,10 +125,10 @@ function AddVideo() {
                           drag and drop
                         </p>
                       </div>
-                      <input id="video-file" type="file" className="hidden" {...register("video", { required: true })} />
+                      <input id="video-file" type="file" className="hidden" {...register("link", { required: true })} />
                     </label>
                   </div>
-                  {errors.video && <p className="text-red-500">video is required</p>}
+                  {errors.link && <p className="text-red-500">Video is required</p>}
                 </FormControl>
                 <FormControl>
                   <FormLabel>Title</FormLabel>
@@ -137,12 +142,15 @@ function AddVideo() {
                 </FormControl>
                 <FormControl>
                   <FormLabel>Catrgory</FormLabel>
-                  <Select placeholder="Select option" {...register("catrgory", { required: true })}>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                  <Select placeholder="Select option" {...register("categoryId", { required: true })}>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
                   </Select>
-                  {errors.catrgory && <p className="text-red-500">Catrgory is required</p>}
+                  {errors.catrgoryId && <p className="text-red-500">Catrgory is required</p>}
+                </FormControl>
+                <FormControl>
+                  <Input id="channelId" value={1} {...register("channelId")} className="hidden rounded-md border-gray-300" />
                 </FormControl>
               </Stack>
               <ModalFooter>
