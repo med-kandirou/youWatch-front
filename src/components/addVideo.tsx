@@ -14,6 +14,7 @@ import {
   Stack,
   Textarea,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -24,6 +25,7 @@ import { addVideo } from "../state/videoo/videoActions";
 
 function AddVideo() {
   const channelId=useSelector((state:RootState)=>state.channel.channel?.id)
+  const categories=useSelector((state:RootState)=>state.categories.categories)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [size, setSize] = React.useState("md");
   const handleSizeClick = (newSize: React.SetStateAction<string>) => {
@@ -32,8 +34,17 @@ function AddVideo() {
   };
   const {register,handleSubmit,formState: { errors }} = useForm();
   const dispatch = useDispatch<appDispatch>();
-
+  const toast = useToast()
   async function onSubmit(data:object) {
+
+    const promise = new Promise((resolve) => {
+      setTimeout(() => resolve(200), 2000)
+    })
+    toast.promise(promise, {
+      success: { title: 'Upload Success', description: 'Your video has been successfully uploaded.' },
+      loading: { title: 'Uploading Video', description: 'Please wait while your video is being uploaded.' },
+    });
+
     const formthumbnail = new FormData();
     formthumbnail.append('file', data.thumbnail[0]);
     const urlThumbnail = await dispatch(uploadThumbnail(formthumbnail));
@@ -143,14 +154,14 @@ function AddVideo() {
                 <FormControl>
                   <FormLabel>Catrgory</FormLabel>
                   <Select placeholder="Select option" {...register("categoryId", { required: true })}>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
+                    {categories.map(cat => (
+                      <option value={cat.id}>{cat.name}</option>
+                    ))}
                   </Select>
                   {errors.catrgoryId && <p className="text-red-500">Catrgory is required</p>}
                 </FormControl>
                 <FormControl>
-                  <Input id="channelId" value={1} {...register("channelId")} className="hidden rounded-md border-gray-300" />
+                  <Input id="channelId" value={channelId} {...register("channelId")} className="hidden rounded-md border-gray-300" />
                 </FormControl>
               </Stack>
               <ModalFooter>

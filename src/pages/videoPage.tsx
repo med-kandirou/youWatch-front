@@ -62,7 +62,6 @@ function VideoPage () {
                         width="600"
                         height="320"
                         className="w-full rounded-md ml-2"
-                        //allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
                         autoPlay
                         controls
                         style={{ aspectRatio: "16/9", objectFit: "cover" }}
