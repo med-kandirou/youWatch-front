@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, appDispatch } from "../state/store";
 import { uploadThumbnail, uploadVideo } from "../state/file/fileActions";
 import { addVideo } from "../state/videoo/videoActions";
+import { getvideoByChannel } from "../state/currentVideo/currentVideoActions";
 
 function AddVideo() {
   const channelId=useSelector((state:RootState)=>state.channel.channel?.id)
@@ -51,13 +52,12 @@ function AddVideo() {
     const formvideo = new FormData();
     formvideo.append('file', data.link[0]);
     const urlvideo = await dispatch(uploadVideo(formvideo));
-
     data.thumbnail=urlThumbnail.payload.url;
     data.link=urlvideo.payload.url;
     console.log(data);
     
-    dispatch(addVideo(data)).then(res=>{
-      console.log(res)
+    dispatch(addVideo(data)).then(()=>{
+      dispatch(getvideoByChannel(localStorage.getItem('channelId')))
     });
   }
 
