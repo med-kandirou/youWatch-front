@@ -24,10 +24,13 @@ const channelSlice = createSlice({
     name: "channel",
     initialState,
     extraReducers: (builder) => {
+        //login
         builder.addCase(channelLogin.fulfilled, (state, action) => {
             state.isAuth = true;
             state.token = action.payload.token;
+            localStorage.setItem('token',action.payload.token)
             state.channel = action.payload.channel;
+            localStorage.setItem('channelId',action.payload.channel.id.toString())
         });
         builder.addCase(channelLogin.rejected, (state,action) => {
             state.error = action.payload as string;
