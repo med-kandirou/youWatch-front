@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Video } from "../Models/Video";
 import { convertDate, convertNumber } from "../helpers/converters";
 import { RootState } from "../state/store";
+import { Badge } from "@chakra-ui/react";
 
 function Trending() {
     const videos=useSelector((state:RootState)=>state.videos.videos)
@@ -22,7 +23,7 @@ function Trending() {
                 <SideBarLeft />
                 <div className="grid grid-cols-1 gap-4 p-4">
                     {videos && videos.length > 0 ? (
-                        videos.map((v: Video) => 
+                        videos.map((v: Video,index) => 
                             <Link key={v.id} to={`/watch/${v.id}`}>
                                 <div className="flex gap-6 space-y-2 cursor-pointer">
                                     <img
@@ -42,6 +43,7 @@ function Trending() {
                                         </div>
                                         <div>       
                                             <p className="text-xs pb-1 text-gray-600">{v.description}</p>
+                                            <Badge colorScheme='red'>{ index+1 }# of trending</Badge>
                                         </div>
                                     </div>
                                 </div>
