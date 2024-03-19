@@ -7,6 +7,8 @@ import SearchPage from './pages/searchPage'
 import VideoPage from './pages/videoPage'
 import MyProfile from './pages/myProfile'
 import Profile from './pages/profile'
+import Trending from './pages/trending'
+import Subscription from './pages/subscription'
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/watch/:id" element={<VideoPage />} />
               <Route path="/myProfile" element={<MyProfile />} />
+              <Route path="/trending" element={<Trending />} />
+              <Route path="/subscription" element={<Subscription />} />
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
