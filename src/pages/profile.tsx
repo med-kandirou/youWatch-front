@@ -60,9 +60,6 @@ function Profile(){
                                     <div className="mr-4 p-3 text-center">
                                     <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">{channel?.nbrFollowers}</span><span className="text-sm text-blueGray-400">Followers</span>
                                     </div>
-                                    <div className="lg:mr-4 p-3 text-center">
-                                    <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">89</span><span className="text-sm text-blueGray-400">Comments</span>
-                                    </div>
                                 </div>
                                 </div>
                             </div>
