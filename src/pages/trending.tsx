@@ -43,7 +43,7 @@ function Trending() {
                                         </div>
                                         <div>       
                                             <p className="text-xs pb-1 text-gray-600">{v.description}</p>
-                                            <Badge colorScheme='red'>{ index+1 }# of trending</Badge>
+                                            <Badge colorScheme='red'>{ index+1 }# in trending</Badge>
                                         </div>
                                     </div>
                                 </div>

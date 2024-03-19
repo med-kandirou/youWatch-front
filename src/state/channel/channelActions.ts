@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { Channel } from "../../Models/Channel"
 import myApi from "../../helpers/myApi"
+import { Subscribe } from "../../Models/Subscribe"
 
 export const channelLogin = createAsyncThunk<{token :string, channel :Channel, done : boolean}>(
     'auth/login',
@@ -31,6 +32,20 @@ export const getchannelById = createAsyncThunk<Channel>(
     'channel/getOne',
     async (channelCredentials) => {
         const { data } = await myApi.get(`/channel/${channelCredentials}`)
+        return data
+    }
+)
+
+
+export const getSubscriptionsById = createAsyncThunk<Subscribe[]>(
+    'channel/getSubscriptionsById',
+    async () => {
+        const token=localStorage.getItem('token');
+        const { data } = await myApi.get(`/subscribe/channel/${localStorage.getItem('channelId')}`,{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
         return data
     }
 )
