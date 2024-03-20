@@ -62,7 +62,6 @@ function SideBarLeft(){
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            //strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
             className="text-gray-700"
@@ -91,6 +90,25 @@ function SideBarLeft(){
                     <path d="M20 19h-4c0-1.5.44-2 1.5-2.5S20 15.33 20 14c0-.47-.17-.93-.48-1.29a2.11 2.11 0 0 0-2.62-.44c-.42.24-.74.62-.9 1.07"></path>
                 </svg>
                 <Link to="/statistiques" className="font-medium">Statistiques</Link>
+            </div>
+        )}
+        {role == 'ADMIN' && (
+            <div className="flex items-center space-x-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-gray-700">
+                    <path d="m4 5 8 8"></path>
+                    <path d="m12 5-8 8"></path>
+                    <path d="M20 19h-4c0-1.5.44-2 1.5-2.5S20 15.33 20 14c0-.47-.17-.93-.48-1.29a2.11 2.11 0 0 0-2.62-.44c-.42.24-.74.62-.9 1.07"></path>
+                </svg>
+                <Link to="/categories" className="font-medium">Categories</Link>
             </div>
         )}
 

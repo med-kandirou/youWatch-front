@@ -10,6 +10,7 @@ import Profile from './pages/profile'
 import Trending from './pages/trending'
 import Subscription from './pages/subscription'
 import Statistiques from './pages/admin/statistiques'
+import Categories from './pages/admin/categoties'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
               <Route path="/trending" element={<Trending />} />
               <Route path="/subscription" element={<Subscription />} />
               <Route path="/statistiques" element={<Statistiques />} />
+              <Route path="/categories" element={<Categories />} />
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

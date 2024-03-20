@@ -11,3 +11,17 @@ export const getAllCategories = createAsyncThunk<Category[]>(
     }
 )
 
+
+export const deleteCategory = createAsyncThunk<Category>(
+    'category/delete',
+    async (id) => {
+        const token=localStorage.getItem('token');
+        const { data } = await myApi.delete(`/category/${id}`,{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    }
+)
+
