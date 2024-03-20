@@ -25,3 +25,19 @@ export const deleteCategory = createAsyncThunk<Category>(
     }
 )
 
+export const addCategory = createAsyncThunk<Category>(
+    'category/addCategory',
+    async (category) => {
+        const token = localStorage.getItem('token');
+        const { data } = await myApi.post(`/category`, 
+        {
+            "name":category    
+        }, 
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return data;
+    }
+);

@@ -9,13 +9,11 @@ import { getSubscriptionsById } from "../../state/channel/channelActions";
 import { RootState, appDispatch } from "../../state/store";
 import { Category } from "../../Models/Categorie";
 import { deleteCategory, getAllCategories } from "../../state/categories/categorieActions";
+import AddCategory from "../../components/addCategory";
 
 function Categories() {
     const dispatch = useDispatch<appDispatch>();
     const categories=useSelector((state:RootState)=>state.categories.categories)
-    useEffect(()=>{
-        
-    },[])
     function handleDelete(id:number){
         dispatch(deleteCategory(id)).then(()=>{
             dispatch(getAllCategories())
@@ -25,9 +23,14 @@ function Categories() {
       <>
         <div className="bg-white">
                 <Header />
+                
                 <div className="flex">
                     <SideBarLeft />
                     <div>
+                        <div className="mt-6 mb-5">
+                            <center><AddCategory /></center>
+                        </div>
+                    
                         <div className="grid grid-cols-4 gap-4 p-4">
                             {categories ? (
                                 categories.map((c: Category) => (
