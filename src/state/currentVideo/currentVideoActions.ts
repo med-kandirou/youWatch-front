@@ -46,3 +46,27 @@ export const saveComment = createAsyncThunk<Comment, { videoId: string; channelI
         return data
     }
 )
+
+
+export const savereact = createAsyncThunk<Comment, { videoId: string; channelId: string; react: boolean }>(
+    'video/react',
+    async ({ channelId,videoId, react }:{ videoId: string; channelId: string; react: boolean }) => {
+        const token = localStorage.getItem('token');
+        const { data } = await myApi.post(`/react`,{
+            "video_channel_id":{
+                "channel":{
+                    "id":channelId
+                },
+                "video":{
+                    "id":videoId
+                }
+            },
+            "reaction":react
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    }
+)
