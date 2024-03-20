@@ -107,6 +107,7 @@ function Login() {
                   <FormControl>
                     <FormLabel htmlFor="email">Email</FormLabel>
                     <Input
+                      value="admin@gmail.com"
                       id="email"
                       type="email"
                       {...register("email", { required: true })}
@@ -116,6 +117,7 @@ function Login() {
                   <FormControl>
                     <FormLabel htmlFor="Password">Password</FormLabel>
                     <Input
+                      value="password"
                       id="password"
                       type="password"
                       {...register("password", { required: true })}

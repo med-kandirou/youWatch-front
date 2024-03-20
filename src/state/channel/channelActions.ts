@@ -49,3 +49,17 @@ export const getSubscriptionsById = createAsyncThunk<Subscribe[]>(
         return data
     }
 )
+
+
+export const stats = createAsyncThunk<number[]>(
+    'channel/stats',
+    async () => {
+        const token=localStorage.getItem('token');
+        const { data } = await myApi.get(`/channel/stats`,{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    }
+)

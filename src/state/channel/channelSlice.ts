@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Channel } from "../../Models/Channel";
-import { channelLogin, channelregister, getSubscriptionsById, getchannelById } from "./channelActions";
+import { channelLogin, channelregister, getSubscriptionsById, getchannelById, stats } from "./channelActions";
 import { Subscribe } from "../../Models/Subscribe";
 
 interface channelState {
@@ -10,7 +10,8 @@ interface channelState {
     isAuth:boolean,
     error:string,
     loading:boolean,
-    subscribes:Subscribe[] | null
+    subscribes:Subscribe[] | null,
+    stats:number[] | null,
 }
 
 const initialState:channelState={
@@ -21,6 +22,7 @@ const initialState:channelState={
     error:'',
     loading:false,
     subscribes:[],
+    stats:[],
 }
 
 const channelSlice = createSlice({
@@ -59,6 +61,10 @@ const channelSlice = createSlice({
          //getSubscriptionsById
          builder.addCase(getSubscriptionsById.fulfilled, (state, action) => {
             state.subscribes=action.payload
+        });
+         //stats
+        builder.addCase(stats.fulfilled, (state, action) => {
+            state.stats=action.payload
         });
     },
     reducers:{}
