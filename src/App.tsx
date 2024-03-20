@@ -9,6 +9,7 @@ import MyProfile from './pages/myProfile'
 import Profile from './pages/profile'
 import Trending from './pages/trending'
 import Subscription from './pages/subscription'
+import Statistiques from './pages/admin/statistiques'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
               <Route path="/myProfile" element={<MyProfile />} />
               <Route path="/trending" element={<Trending />} />
               <Route path="/subscription" element={<Subscription />} />
+              <Route path="/statistiques" element={<Statistiques />} />
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />

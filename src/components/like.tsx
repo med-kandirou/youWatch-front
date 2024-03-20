@@ -1,4 +1,4 @@
-function Like(){
+function Like(props: {color: string}){
     return(
         <>
             <svg
@@ -7,7 +7,7 @@ function Like(){
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="currentColor"
+                stroke={props.color}
                 strokeLinecap="round"
                 strokeWidth="round"
                 className="w-6 h-6"
