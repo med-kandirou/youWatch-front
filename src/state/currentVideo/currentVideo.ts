@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Video } from "../../Models/Video";
 import { Comment } from "../../Models/Comment";
-import { getCommentByVideo, getCurrentVideo, getvideoByChannel } from "./currentVideoActions";
+import { getCommentByVideo, getCurrentVideo, getvideoByChannel, saveComment } from "./currentVideoActions";
 
 
 
@@ -32,6 +32,10 @@ const currentvideoSlice = createSlice({
         //getCommentByVideo
         builder.addCase(getCommentByVideo.fulfilled, (state, action) => {
             state.comments = action.payload;
+        });
+        //getCommentByVideo
+        builder.addCase(saveComment.fulfilled, (state, action) => {
+            state.comments.push(action.payload);
         });
     },
     reducers:{}

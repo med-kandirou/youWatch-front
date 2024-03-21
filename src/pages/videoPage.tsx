@@ -23,7 +23,6 @@ function VideoPage () {
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const comments=useSelector((state:RootState)=>state.currentVideo.comments)
     const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
-    const channelId=useSelector((state:RootState)=>state.channel.channel?.id)
     useEffect(() => {
         dispatch(getCurrentVideo(video_id.id)).then(() => {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
@@ -47,14 +46,16 @@ function VideoPage () {
           })
     }
     function comment(){
-        isAuth ? 
-        //dispatch(saveComment(currentVideo?.id,channelId,content))
-        console.log("comment")
-        : toast({
-            title: `Login first`,
-            variant: 'top-accent',
-            isClosable: true,
-          })
+        isAuth ? (
+            dispatch(saveComment({ videoId: currentVideo?.id, channelId: localStorage.getItem("channelId"), content: content })),
+            setContent()
+        ) : (
+            toast({
+                title: `Login first`,
+                variant: 'top-accent',
+                isClosable: true,
+            })
+        );
     }
 
     return (
