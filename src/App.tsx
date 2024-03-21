@@ -10,7 +10,7 @@ import Profile from './pages/profile'
 import Trending from './pages/trending'
 import Subscription from './pages/subscription'
 import Statistiques from './pages/admin/statistiques'
-import Categories from './pages/admin/categoties'
+import Categories from './pages/admin/categories'
 
 
 function App() {

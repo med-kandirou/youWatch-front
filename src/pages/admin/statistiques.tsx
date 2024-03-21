@@ -33,7 +33,7 @@ function Statistiques() {
                                     <div className="flex justify-between px-5 pt-6 mb-2 text-sm text-gray-600">
                                         <p>TOTAL</p>
                                     </div>
-                                    <p className="py-4 text-3xl ml-5">{statstiques[0].toString()}</p>
+                                    <p className="py-4 text-3xl ml-5">{statstiques[0]}</p>
                                 </div>
                             </div>
                             <div className="container mx-auto pr-4">
@@ -44,7 +44,7 @@ function Statistiques() {
                                     <div className="flex justify-between px-5 pt-6 mb-2 text-sm text-gray-600">
                                         <p>TOTAL</p>
                                     </div>
-                                    <p className="py-4 text-3xl ml-5">{statstiques[1].toString()}</p>
+                                    <p className="py-4 text-3xl ml-5">{statstiques[1]}</p>
                                 </div>
                             </div>
                             <div className="container mx-auto pr-4">
@@ -55,7 +55,7 @@ function Statistiques() {
                                     <div className="flex justify-between px-5 pt-6 mb-2 text-sm text-gray-600">
                                         <p>TOTAL</p>
                                     </div>
-                                    <p className="py-4 text-3xl ml-5">{statstiques[2].toString()}</p>
+                                    <p className="py-4 text-3xl ml-5">{statstiques[2]}</p>
                                 </div>
                             </div>
                         </div>
