@@ -48,7 +48,7 @@ function VideoPage () {
     function comment(){
         isAuth ? (
             dispatch(saveComment({ videoId: currentVideo?.id, channelId: localStorage.getItem("channelId"), content: content })),
-            setContent()
+            setContent('')
         ) : (
             toast({
                 title: `Login first`,
