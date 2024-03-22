@@ -90,3 +90,19 @@ export const subscribe = createAsyncThunk<Subscribe>(
 )
 
 
+
+
+export const updateChannel = createAsyncThunk<Channel>(
+    'channel/update',
+    async (payload) => {
+        const token=localStorage.getItem('token');
+        const { data } = await myApi.post(`/channel/update`,payload,
+        {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    }
+)
+

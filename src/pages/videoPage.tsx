@@ -24,15 +24,14 @@ function VideoPage () {
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const comments=useSelector((state:RootState)=>state.currentVideo.comments)
     const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
-    let reaction=null
     useEffect(() => {
         dispatch(getCurrentVideo(video_id.id)).then(() => {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
             dispatch(getCommentByVideo(video_id.id));
 
             dispatch(getReaction({channelId:localStorage.getItem('channelId'),videoId:currentVideo?.id})).then((res)=>{
-                reaction=res.payload
-                console.log(reaction)
+                localStorage.setItem('react',res.payload)
+                // console.log(LocalStorage.getItem('react'))
             })
         });
     },[video_id]);
@@ -122,13 +121,13 @@ function VideoPage () {
                         </div>
                         <div className="flex items-center space-x-4">
                         <button onClick={() => react("true")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
-                            {reaction == true ? <Like color='red' /> : null}
-                            {reaction == undefined && <Like color='black' />} 
+                            {localStorage.getItem('react') && <Like color='red' />}
+                            {!localStorage.getItem('react') && <Like color='black' />} 
                             <span>{convertNumber(currentVideo?.nbrLikes)}</span>
                         </button>
                         <button onClick={() => react("false")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
-                            {reaction == false ? <Dislike color='red' /> : null}
-                            {reaction == undefined && <Dislike color='black' />} 
+                            {!localStorage.getItem('react') && <Dislike color='red' />}
+                            {localStorage.getItem('react') && <Dislike color='black' />}
                         </button>
 
                         <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">

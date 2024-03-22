@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Spinner, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, useToast } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, Spinner, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { getvideoByChannel } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { findVueByChannelId } from "../state/videoo/videoActions";
 import { Vue } from "../Models/Vue";
 import AddVideo from "../components/addVideo";
 import { uploadThumbnail } from "../state/file/fileActions";
+import { updateChannel } from "../state/channel/channelActions";
 
 function MyProfile(){
     const {register,handleSubmit,formState: { errors }} = useForm();
@@ -23,21 +24,22 @@ function MyProfile(){
     const vues=useSelector((state:RootState)=>state.videos.vues)
     const channel=useSelector((state:RootState)=>state.channel.channel)
     async function onUpdate(data:object) {
-
-        // const formthumbnail = new FormData();
-        // formthumbnail.append('file', data.thumbnail[0]);
-        // const urlThumbnail = await dispatch(uploadThumbnail(formthumbnail));
-        // const formvideo = new FormData();
-        // formvideo.append('file', data.link[0]);
-        // const urlvideo = await dispatch(uploadVideo(formvideo));
-        // data.thumbnail=urlThumbnail.payload.url;
-        // data.link=urlvideo.payload.url;
-        // console.log(data);
-        
-        // dispatch(addVideo(data)).then(()=>{
-        //   dispatch(getvideoByChannel(localStorage.getItem('channelId')))
-        // });
-        console.log(data)
+        const profilImg = new FormData();
+        if (data.profilImg && data.profilImg.length > 0) {
+            profilImg.append('file', data.profilImg[0]);
+            const profilImgLink = await dispatch(uploadThumbnail(profilImg));
+            data.profilImg = profilImgLink.payload.url;
+        }
+        const coverImg = new FormData();
+        if (data.link && data.link.length > 0) {
+            coverImg.append('file', data.link[0]);
+            const coverImgLink = await dispatch(uploadThumbnail(coverImg));
+            data.coverImg = coverImgLink.payload.url;
+        }
+        console.log(data);
+        dispatch(updateChannel(data)).then((res) => {
+            console.log(res);
+        });
       }
 
     return (
@@ -135,6 +137,7 @@ function MyProfile(){
                                                 </FormControl>
                                                 <FormControl>
                                                     <FormLabel >Password</FormLabel>
+                                                    <Input id="id" hidden value={localStorage.getItem('channelId')} type="text" {...register("id")}/>
                                                     <Input id="password" type="password" className="rounded-md border-gray-300" {...register("password")}/>
                                                 </FormControl>
                                             </Stack>
