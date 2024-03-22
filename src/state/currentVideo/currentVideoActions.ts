@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import myApi from "../../helpers/myApi"
 import { Video } from "../../Models/Video"
 import { Comment } from "../../Models/Comment"
+import { Reaction } from "../../Models/Reaction"
 
 
 export const getCurrentVideo = createAsyncThunk<Video>(
@@ -48,20 +49,20 @@ export const saveComment = createAsyncThunk<Comment>(
 
 
 
-export const savereact = createAsyncThunk<Comment, { videoId: string; channelId: string; react: boolean }>(
+export const saveReact = createAsyncThunk<Reaction>(
     'video/react',
-    async ({ channelId,videoId, react }:{ videoId: string; channelId: string; react: boolean }) => {
+    async (payload) => {
         const token = localStorage.getItem('token');
         const { data } = await myApi.post(`/react`,{
             "video_channel_id":{
                 "channel":{
-                    "id":channelId
+                    "id":payload.channelId
                 },
                 "video":{
-                    "id":videoId
+                    "id":payload.videoId
                 }
             },
-            "reaction":react
+            "reaction":payload.reaction
         }, {
             headers: {
                 Authorization: `Bearer ${token}`

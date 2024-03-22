@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Comments from "../components/comments";
 import Header from "../components/header"
-import { getCommentByVideo, getCurrentVideo, getvideoByChannel, saveComment } from "../state/currentVideo/currentVideoActions";
+import { getCommentByVideo, getCurrentVideo, getvideoByChannel, saveComment, saveReact } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, appDispatch } from "../state/store";
 import { Link, useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ import { Spinner, useToast } from "@chakra-ui/react";
 import Like from "../components/like";
 import Dislike from "../components/dislike";
 import Share from "../components/share";
+import { subscribe } from "../state/channel/channelActions";
 
 function VideoPage () {
     const video_id = useParams();
@@ -32,14 +33,20 @@ function VideoPage () {
 
     const toast = useToast()
     function follow(){
-        isAuth ? console.log(isAuth) : toast({
+        isAuth ? (
+            dispatch(subscribe({ channelFollow: localStorage.getItem("channelId"), channelFollowed: currentVideo?.channel.id})).then((res)=>{
+                console.log(res)
+            }))
+        : toast({
             title: `Login first`,
             variant: 'top-accent',
             isClosable: true,
           })
     }
-    function react(){
-        isAuth ? console.log(isAuth) : toast({
+    function react(reaction:string){
+        isAuth ? (
+        dispatch(saveReact({ videoId: currentVideo?.id, channelId: localStorage.getItem("channelId"), reaction: reaction })).then(res=>{console.log(res)})
+        ):toast({
             title: `Login first`,
             variant: 'top-accent',
             isClosable: true,
@@ -108,11 +115,11 @@ function VideoPage () {
                             </span>
                         </div>
                         <div className="flex items-center space-x-4">
-                        <button onClick={()=>react()} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
+                        <button onClick={()=>react("true")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
                             <Like color='red' />
                             <span>{convertNumber(currentVideo?.nbrLikes)}</span>
                         </button>
-                        <button onClick={()=>react()} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
+                        <button onClick={()=>react("false")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
                             <Dislike />
                         </button>
                         <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">

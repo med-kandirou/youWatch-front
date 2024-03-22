@@ -63,3 +63,30 @@ export const stats = createAsyncThunk<number[]>(
         return data
     }
 )
+
+
+export const subscribe = createAsyncThunk<Subscribe>(
+    'channel/subscribe',
+    async (payload) => {
+        const token=localStorage.getItem('token');
+        const { data } = await myApi.post(`/subscribe`,
+        {
+            "subscribeId":{
+                "channelFollow":{
+                    "id":payload.channelFollow
+                },
+                "channelFollowed":{
+                    "id":payload.channelFollowed
+                }
+            }
+        },
+        {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    }
+)
+
+
