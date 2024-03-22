@@ -71,3 +71,17 @@ export const saveReact = createAsyncThunk<Reaction>(
         return data
     }
 )
+
+
+export const getReaction = createAsyncThunk<Reaction>(
+    'video/getReaction',
+    async (payload) => {
+        const token = localStorage.getItem('token');
+        const { data } = await myApi.get(`/react/${payload.channelId}/${payload.videoId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data.reaction
+    }
+)

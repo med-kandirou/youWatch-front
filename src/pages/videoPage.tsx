@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Comments from "../components/comments";
 import Header from "../components/header"
-import { getCommentByVideo, getCurrentVideo, getvideoByChannel, saveComment, saveReact } from "../state/currentVideo/currentVideoActions";
+import { getCommentByVideo, getCurrentVideo, getReaction, getvideoByChannel, saveComment, saveReact } from "../state/currentVideo/currentVideoActions";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, appDispatch } from "../state/store";
 import { Link, useParams } from "react-router-dom";
@@ -24,10 +24,16 @@ function VideoPage () {
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const comments=useSelector((state:RootState)=>state.currentVideo.comments)
     const isAuth=useSelector((state:RootState)=>state.channel.isAuth)
+    let reaction=null
     useEffect(() => {
         dispatch(getCurrentVideo(video_id.id)).then(() => {
             dispatch(getvideoByChannel(localStorage.getItem('id_channel').toString()));
             dispatch(getCommentByVideo(video_id.id));
+
+            dispatch(getReaction({channelId:localStorage.getItem('channelId'),videoId:currentVideo?.id})).then((res)=>{
+                reaction=res.payload
+                console.log(reaction)
+            })
         });
     },[video_id]);
 
@@ -115,13 +121,16 @@ function VideoPage () {
                             </span>
                         </div>
                         <div className="flex items-center space-x-4">
-                        <button onClick={()=>react("true")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
-                            <Like color='red' />
+                        <button onClick={() => react("true")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
+                            {reaction == true ? <Like color='red' /> : null}
+                            {reaction == undefined && <Like color='black' />} 
                             <span>{convertNumber(currentVideo?.nbrLikes)}</span>
                         </button>
-                        <button onClick={()=>react("false")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
-                            <Dislike />
+                        <button onClick={() => react("false")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
+                            {reaction == false ? <Dislike color='red' /> : null}
+                            {reaction == undefined && <Dislike color='black' />} 
                         </button>
+
                         <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
                             <Share />
                             <span>share</span>
