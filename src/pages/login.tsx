@@ -81,7 +81,7 @@ function Login() {
                   <FormControl>
                     <FormLabel htmlFor="email">Email</FormLabel>
                     <Input
-                      value="admin@gmail.com"
+                      value="user@gmail.com"
                       id="email"
                       type="email"
                       {...register("email", { required: true })}

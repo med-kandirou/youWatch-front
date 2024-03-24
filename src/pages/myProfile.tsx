@@ -11,7 +11,7 @@ import { findVueByChannelId } from "../state/videoo/videoActions";
 import { Vue } from "../Models/Vue";
 import AddVideo from "../components/addVideo";
 import { uploadThumbnail } from "../state/file/fileActions";
-import { updateChannel } from "../state/channel/channelActions";
+import { getchannelById, updateChannel } from "../state/channel/channelActions";
 
 function MyProfile(){
     const {register,handleSubmit,formState: { errors }} = useForm();
@@ -19,11 +19,14 @@ function MyProfile(){
     useEffect(() => {
         dispatch(getvideoByChannel(localStorage.getItem('channelId')))
         dispatch(findVueByChannelId(localStorage.getItem('channelId')))
-    }, []);
+        dispatch(getchannelById(localStorage.getItem('channelId')))
+    }, [dispatch]);
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
     const vues=useSelector((state:RootState)=>state.videos.vues)
     const channel=useSelector((state:RootState)=>state.channel.channel)
     async function onUpdate(data:object) {
+        console.log(data.password)
+        console.log(data)
         const profilImg = new FormData();
         if (data.profilImg && data.profilImg.length > 0) {
             profilImg.append('file', data.profilImg[0]);
@@ -31,15 +34,11 @@ function MyProfile(){
             data.profilImg = profilImgLink.payload.url;
         }
         const coverImg = new FormData();
-        if (data.link && data.link.length > 0) {
-            coverImg.append('file', data.link[0]);
+        if (data.coverImg && data.coverImg.length > 0) {
+            coverImg.append('file', data.coverImg[0]);
             const coverImgLink = await dispatch(uploadThumbnail(coverImg));
             data.coverImg = coverImgLink.payload.url;
         }
-        console.log(data);
-        dispatch(updateChannel(data)).then((res) => {
-            console.log(res);
-        });
       }
 
     return (
@@ -137,7 +136,7 @@ function MyProfile(){
                                                 </FormControl>
                                                 <FormControl>
                                                     <FormLabel >Password</FormLabel>
-                                                    <Input id="id" hidden value={localStorage.getItem('channelId')} type="text" {...register("id")}/>
+                                                    <Input id="id" hidden value={channel?.id} type="text" {...register("id")}/>
                                                     <Input id="password" type="password" className="rounded-md border-gray-300" {...register("password")}/>
                                                 </FormControl>
                                             </Stack>

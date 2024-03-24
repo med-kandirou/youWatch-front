@@ -96,7 +96,16 @@ export const updateChannel = createAsyncThunk<Channel>(
     'channel/update',
     async (payload) => {
         const token=localStorage.getItem('token');
-        const { data } = await myApi.post(`/channel/update`,payload,
+        const { data } = await myApi.put(`/channel/update`,
+            {
+                "id": payload.id,
+                "firstname": payload.firstname,
+                "lastname": payload.firstname,
+                "profilImg": payload.profilImg,
+                "coverImg": payload.coverImg,
+                "email": payload.email,
+                "password": payload.password
+            },
         {
             headers:{
                 Authorization: `Bearer ${token}`
