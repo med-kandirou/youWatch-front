@@ -1,13 +1,19 @@
-function Dislike(props: {color: string}){
+import { useState } from "react";
+
+function Dislike(){
+    const [liked, setLiked] = useState(false);
+    const handleClick = () => {
+        setLiked(!liked);
+    };
     return(
         <>
-            <svg
+            <svg onClick={handleClick}
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke={props.color}
+                stroke={liked ? 'red' : 'black'}
                 strokeLinecap="round"
                 strokeWidth="round"
                 className="w-6 h-6"

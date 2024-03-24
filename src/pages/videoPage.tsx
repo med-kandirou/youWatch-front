@@ -36,17 +36,22 @@ function VideoPage () {
         });
     },[video_id]);
 
+    const [followed, setfollowed] = useState('follow');
     const toast = useToast()
     function follow(){
-        isAuth ? (
-            dispatch(subscribe({ channelFollow: localStorage.getItem("channelId"), channelFollowed: currentVideo?.channel.id})).then((res)=>{
-                console.log(res)
-            }))
-        : toast({
-            title: `Login first`,
-            variant: 'top-accent',
-            isClosable: true,
-          })
+        if (isAuth) {
+            setfollowed('followed');
+            dispatch(subscribe({ channelFollow: localStorage.getItem("channelId"), channelFollowed: currentVideo?.channel.id }))
+                .then((res) => {
+                    console.log(res);
+                });
+        } else {
+            toast({
+                title: 'Login first',
+                variant: 'top-accent',
+                isClosable: true,
+            });
+        }
     }
     function react(reaction:string){
         isAuth ? (
@@ -68,6 +73,7 @@ function VideoPage () {
             })
         );
     }
+    
 
     return (
         <>
@@ -105,7 +111,7 @@ function VideoPage () {
                                 <div className="text-sm">{convertNumber(currentVideo?.channel.nbrFollowers)} followers</div>
                             </div>
                             <div>
-                                <button onClick={()=>follow()} type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 me-2 mb-2 ml-4">Follow</button>
+                                <button onClick={()=>follow()} type="button" className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 me-2 mb-2 ml-4">{followed}</button>
                             </div>
                         </div>
                         <span className="text-sm font-semibold">
@@ -121,13 +127,11 @@ function VideoPage () {
                         </div>
                         <div className="flex items-center space-x-4">
                         <button onClick={() => react("true")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
-                            {localStorage.getItem('react') && <Like color='red' />}
-                            {!localStorage.getItem('react') && <Like color='black' />} 
+                            <Like />  
                             <span>{convertNumber(currentVideo?.nbrLikes)}</span>
                         </button>
                         <button onClick={() => react("false")} className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
-                            {!localStorage.getItem('react') && <Dislike color='red' />}
-                            {localStorage.getItem('react') && <Dislike color='black' />}
+                            <Dislike />
                         </button>
 
                         <button className="justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 flex items-center space-x-1">
