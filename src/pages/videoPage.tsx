@@ -18,7 +18,7 @@ import { subscribe } from "../state/channel/channelActions";
 
 function VideoPage () {
     const video_id = useParams();
-    const [content,setContent] = useState();
+    const [content,setContent] = useState("");
     const dispatch = useDispatch<appDispatch>();
     const currentVideo=useSelector((state:RootState)=>state.currentVideo.currentVideo)
     const videos=useSelector((state:RootState)=>state.currentVideo.videos)
@@ -64,6 +64,7 @@ function VideoPage () {
     }
     function comment(){
         isAuth ? (
+            setContent(''),
             dispatch(saveComment({ videoId: currentVideo?.id, channelId: localStorage.getItem("channelId"), content: content }))
         ) : (
             toast({

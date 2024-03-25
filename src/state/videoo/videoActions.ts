@@ -50,6 +50,15 @@ export const addVideo = createAsyncThunk<{video:Video},object>(
 )
 
 
+export const findByCategorie = createAsyncThunk<Video[]>(
+    'video/findByCategorie',
+    async (videoId) => {
+        const { data } = await myApi.get(`/video/byCatagory/${videoId}`)
+        return data;
+    }
+)
+
+
 
 export const trending = createAsyncThunk<Video[]>(
     'video/trending',
@@ -58,3 +67,5 @@ export const trending = createAsyncThunk<Video[]>(
         return data;
     }
 )
+
+

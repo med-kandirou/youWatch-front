@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Video } from "../../Models/Video";
-import { findVueByChannelId, getAllvideos, searchVideo, trending } from "./videoActions";
+import { findByCategorie, findVueByChannelId, getAllvideos, searchVideo, trending } from "./videoActions";
 import { Vue } from "../../Models/Vue";
 
 
@@ -32,6 +32,10 @@ const videoSlice = createSlice({
         //trending
         builder.addCase(trending.fulfilled, (state, action) => {
             console.log(state.videos)
+            state.videos = action.payload;
+        });
+        //findByCategorie
+        builder.addCase(findByCategorie.fulfilled, (state, action) => {
             state.videos = action.payload;
         });
     },
