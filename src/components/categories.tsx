@@ -13,9 +13,7 @@ function Categories(){
     }, []);
     const categories=useSelector((state:RootState)=>state.categories.categories)
     function filter(id: number) {
-        dispatch(findByCategorie(id)).then((res)=>{
-           
-        })
+        dispatch(findByCategorie(id))
     }
 
     return (

@@ -6,8 +6,8 @@ import { Vue } from "../../Models/Vue"
 
 export const getAllvideos = createAsyncThunk<Video[]>(
     'video/all',
-    async (page) => {
-        const { data } = await myApi.get(`/video?page=${page}&size=6`)
+    async () => {
+        const { data } = await myApi.get(`/video`)
         return data
     }
 )

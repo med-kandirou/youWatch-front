@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Categories from "../components/categories";
 import Header from "../components/header";
 import SideBarLeft from "../components/sideBarLeft";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { getAllvideos } from "../state/videoo/videoActions";
 import { RootState, appDispatch } from "../state/store";
 import { Video } from "../Models/Video";
@@ -15,10 +15,10 @@ import { Link } from "react-router-dom";
 function Home() {
   const dispatch = useDispatch<appDispatch>();
   useEffect(() => {
-      dispatch(getAllvideos(0))
-  }, []);
-
-  const videos=useSelector((state:RootState)=>state.videos.videos.content)
+      dispatch(getAllvideos())
+  }, [dispatch]);
+  
+  const videos=useSelector((state:RootState)=>state.videos.videos)
     return (
       <>
         <div className="bg-white">
