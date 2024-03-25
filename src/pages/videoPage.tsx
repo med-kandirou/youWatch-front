@@ -31,7 +31,6 @@ function VideoPage () {
 
             dispatch(getReaction({channelId:localStorage.getItem('channelId'),videoId:currentVideo?.id})).then((res)=>{
                 localStorage.setItem('react',res.payload)
-                // console.log(LocalStorage.getItem('react'))
             })
         });
     },[video_id]);

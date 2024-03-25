@@ -25,8 +25,6 @@ function MyProfile(){
     const vues=useSelector((state:RootState)=>state.videos.vues)
     const channel=useSelector((state:RootState)=>state.channel.channel)
     async function onUpdate(data:object) {
-        console.log(data.password)
-        console.log(data)
         const profilImg = new FormData();
         if (data.profilImg && data.profilImg.length > 0) {
             profilImg.append('file', data.profilImg[0]);
