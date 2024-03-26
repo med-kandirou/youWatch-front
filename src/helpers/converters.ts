@@ -8,8 +8,6 @@ export function convertNumber(num:number){
     }).format(num);
 }
 
-
-
 export function convertDate(date:Date){
     TimeAgo.addLocale(en)
     const timeAgo = new TimeAgo('en-US')
