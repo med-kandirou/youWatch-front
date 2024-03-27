@@ -37,6 +37,9 @@ function MyProfile(){
             const coverImgLink = await dispatch(uploadThumbnail(coverImg));
             data.coverImg = coverImgLink.payload.url;
         }
+        dispatch(updateChannel(data)).then(res=>{
+            console.log(res)
+        })
       }
 
     return (

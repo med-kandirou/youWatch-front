@@ -11,6 +11,7 @@ import Trending from './pages/trending'
 import Subscription from './pages/subscription'
 import Statistiques from './pages/admin/statistiques'
 import Categories from './pages/admin/categories'
+import PrivateRoutes from './utilities/PrivateRoutes'
 
 
 function App() {
@@ -21,11 +22,13 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/watch/:id" element={<VideoPage />} />
-              <Route path="/myProfile" element={<MyProfile />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="/myProfile" element={<MyProfile />} />
+                <Route path="/subscription" element={<Subscription />} />
+                <Route path="/categories" element={<Categories />} />
+              </Route>
               <Route path="/trending" element={<Trending />} />
-              <Route path="/subscription" element={<Subscription />} />
               <Route path="/statistiques" element={<Statistiques />} />
-              <Route path="/categories" element={<Categories />} />
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
